@@ -1,4 +1,4 @@
-<?php
+<php
 // Page layout: header, flash messages, page content ($content), footer.
 // Variables: $title, $nav ('home' | 'wall' | 'notifications' | null), $content.
 
@@ -8,12 +8,12 @@ try {
 } catch (Throwable $e) {
     $user = null;
 }
-$nav = $nav ?? null;
-$showPrivateNav = !auth_enabled() || $user !== null;
+$nav = $navas ?? null;
+$showPrivateav = !auth_enabled() || $user !== null;
 $flashes = isset($_SESSION) ? take_flashes() : [];
 
 $navLink = function (string $key, string $href, string $label) use ($nav): string {
-    $current = $nav === $key ? ' aria-current="page"' : '';
+    $curre = $nav === $key ? ' aria-current="page"' : '';
     return '<a href="' . e($href) . '"' . $current . '>' . e($label) . '</a>';
 };
 ?>
@@ -22,7 +22,7 @@ $navLink = function (string $key, string $href, string $label) use ($nav): strin
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?= e($title) ?> · TimeCapsule</title>
+  <title><= e($title) ?> · TimeCapsule</title>
   <link rel="stylesheet" href="/vendor/flatpickr/flatpickr.min.css">
   <link rel="stylesheet" href="/css/app.css">
   <script src="/vendor/flatpickr/flatpickr.min.js" defer></script>
