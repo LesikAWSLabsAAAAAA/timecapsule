@@ -42,10 +42,20 @@ if (PHP_SAPI !== 'cli') {
     });
 }
 
-// Sessions are plain files in storage/sessions/.
+// Share sessions between application servers when DynamoDB is configured.
 function start_session(): void
 {
-    session_save_path(ROOT_DIR . '/storage/sessions');
+    $table = config('DYNAMODB_SESSION_TABLE');
+    if ($table) {
+        $client = new Aws\DynamoDb\DynamoDbClient([
+            'version' => 'latest',
+            'region' => config('AWS_REGION', 'eu-central-1'),
+        ]);
+        $handler = Aws\DynamoDb\SessionHandler::fromClient($client, ['table_name' => $table]);
+        $handler->register();
+    } else {
+        session_save_path(ROOT_DIR . '/storage/sessions');
+    }
     session_name('timecapsule_session');
     session_set_cookie_params([
         'httponly' => true,
