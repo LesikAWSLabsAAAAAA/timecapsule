@@ -1,0 +1,94 @@
+$ tofu apply -input=false -no-color /tmp/opencode/lab7-app.plan
+aws_security_group.lambda: Creating...
+aws_sqs_queue.dlq: Creating...
+aws_iam_role.lambda["opener"]: Creating...
+aws_sns_topic.events: Creating...
+aws_cloudwatch_log_group.lambda["opener"]: Creating...
+aws_cloudwatch_log_group.lambda["mailer"]: Creating...
+aws_iam_role.scheduler: Creating...
+aws_iam_role.lambda["mailer"]: Creating...
+aws_cloudwatch_log_group.lambda["opener"]: Creation complete after 1s [id=/aws/lambda/timecapsule-dev-opener]
+aws_cloudwatch_log_group.lambda["mailer"]: Creation complete after 1s [id=/aws/lambda/timecapsule-dev-mailer]
+aws_sns_topic.events: Creation complete after 1s [id=arn:aws:sns:eu-central-1:[ACCOUNT_ID]:timecapsule-dev-events]
+aws_sns_topic_subscription.opened_email: Creating...
+aws_iam_role_policy.app_sns: Creating...
+aws_sns_topic_subscription.opened_email: Creation complete after 1s [id=arn:aws:sns:eu-central-1:[ACCOUNT_ID]:timecapsule-dev-events:ccb182e0-187f-46ff-ab7e-b1a34116a5b8]
+aws_iam_role.lambda["opener"]: Creation complete after 2s [id=timecapsule-dev-opener-role]
+aws_iam_role_policy.opener_sns: Creating...
+aws_iam_role.lambda["mailer"]: Creation complete after 2s [id=timecapsule-dev-mailer-role]
+aws_iam_role_policy_attachment.lambda_vpc["mailer"]: Creating...
+aws_iam_role_policy_attachment.lambda_vpc["opener"]: Creating...
+aws_iam_role.scheduler: Creation complete after 2s [id=timecapsule-dev-lab7-opener-scheduler-role]
+aws_iam_role_policy.app_sns: Creation complete after 1s [id=timecapsule-dev-app-role:timecapsule-dev-app-events]
+aws_iam_role_policy_attachment.lambda_vpc["opener"]: Creation complete after 0s [id=timecapsule-dev-opener-role/arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole]
+aws_iam_role_policy_attachment.lambda_vpc["mailer"]: Creation complete after 0s [id=timecapsule-dev-mailer-role/arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole]
+aws_iam_role_policy.opener_sns: Creation complete after 1s [id=timecapsule-dev-opener-role:publish-success]
+aws_security_group.lambda: Creation complete after 3s [id=sg-0a9d83f44a32743f0]
+aws_vpc_security_group_egress_rule.lambda_db: Creating...
+aws_vpc_security_group_ingress_rule.rds_lambda: Creating...
+aws_vpc_security_group_ingress_rule.rds_lambda: Creation complete after 0s [id=sgr-0c22eb77ebc86b380]
+aws_lambda_function.app["opener"]: Creating...
+aws_lambda_function.app["mailer"]: Creating...
+aws_vpc_security_group_egress_rule.lambda_db: Creation complete after 1s [id=sgr-01f994565661aefca]
+aws_sqs_queue.dlq: Still creating... [10s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [10s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [10s elapsed]
+aws_sqs_queue.dlq: Still creating... [20s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [20s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [20s elapsed]
+aws_sqs_queue.dlq: Creation complete after 26s [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/timecapsule-dev-mail-dlq]
+aws_sqs_queue.mail: Creating...
+aws_lambda_function.app["opener"]: Still creating... [30s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [30s elapsed]
+aws_sqs_queue.mail: Still creating... [10s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [40s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [40s elapsed]
+aws_sqs_queue.mail: Still creating... [20s elapsed]
+aws_sqs_queue.mail: Creation complete after 27s [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/timecapsule-dev-mail]
+aws_sqs_queue_policy.mail: Creating...
+aws_iam_role_policy.mailer_sqs: Creating...
+aws_iam_role_policy.mailer_sqs: Creation complete after 0s [id=timecapsule-dev-mailer-role:consume-mail-queue]
+aws_lambda_function.app["mailer"]: Still creating... [50s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [50s elapsed]
+aws_sqs_queue_policy.mail: Still creating... [10s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [1m0s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [1m0s elapsed]
+aws_sqs_queue_policy.mail: Still creating... [20s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [1m10s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [1m10s elapsed]
+aws_sqs_queue_policy.mail: Creation complete after 25s [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/timecapsule-dev-mail]
+aws_sns_topic_subscription.mail: Creating...
+aws_sns_topic_subscription.mail: Creation complete after 1s [id=arn:aws:sns:eu-central-1:[ACCOUNT_ID]:timecapsule-dev-events:f15fa69b-7bf6-48af-b040-64e2ba2d6cab]
+aws_lambda_function.app["mailer"]: Still creating... [1m20s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [1m20s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [1m30s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [1m30s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [1m40s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [1m40s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [1m50s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [1m50s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [2m0s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [2m0s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [2m10s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [2m10s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [2m20s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [2m20s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [2m30s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [2m30s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [2m40s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [2m50s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [3m0s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [3m10s elapsed]
+
+Error: setting Lambda Function (timecapsule-dev-mailer) concurrency: operation error Lambda: PutFunctionConcurrency, https response error StatusCode: 400, RequestID: 575f1b9c-f85b-4f56-ba95-8953f5b3792d, InvalidParameterValueException: Specified ReservedConcurrentExecutions for function decreases account's UnreservedConcurrentExecution below its minimum value of [10].
+
+  with aws_lambda_function.app["mailer"],
+  on main.tf line 197, in resource "aws_lambda_function" "app":
+ 197: resource "aws_lambda_function" "app" {
+
+
+Error: setting Lambda Function (timecapsule-dev-opener) concurrency: operation error Lambda: PutFunctionConcurrency, https response error StatusCode: 400, RequestID: 471f495f-0da3-4764-8f6b-72a2fa56896e, InvalidParameterValueException: Specified ReservedConcurrentExecutions for function decreases account's UnreservedConcurrentExecution below its minimum value of [10].
+
+  with aws_lambda_function.app["opener"],
+  on main.tf line 197, in resource "aws_lambda_function" "app":
+ 197: resource "aws_lambda_function" "app" {

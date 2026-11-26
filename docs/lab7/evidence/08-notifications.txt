@@ -1,0 +1,5 @@
+$ ssh app "cd /var/www/timecapsule && php" < check-notifications.php
+capsule 6: notifications=1
+capsule 7: notifications=2
+capsule 8: notifications=1
+capsule 9: notifications=1

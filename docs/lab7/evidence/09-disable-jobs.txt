@@ -1,0 +1,19 @@
+$ tofu apply -input=false -no-color /tmp/opencode/lab7-stop.plan
+aws_scheduler_schedule.opener: Modifying... [id=default/timecapsule-dev-open-capsules]
+aws_lambda_event_source_mapping.mail: Modifying... [id=d95a7401-1d62-4a2e-825a-2c863ea7bc97]
+aws_scheduler_schedule.opener: Modifications complete after 0s [id=default/timecapsule-dev-open-capsules]
+aws_lambda_event_source_mapping.mail: Still modifying... [id=d95a7401-1d62-4a2e-825a-2c863ea7bc97, 10s elapsed]
+aws_lambda_event_source_mapping.mail: Modifications complete after 14s [id=d95a7401-1d62-4a2e-825a-2c863ea7bc97]
+
+Apply complete! Resources: 0 added, 2 changed, 0 destroyed.
+
+Outputs:
+
+mail_dlq_url = "https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/timecapsule-dev-mail-dlq"
+mail_event_source_mapping_uuid = "d95a7401-1d62-4a2e-825a-2c863ea7bc97"
+mail_queue_arn = "arn:aws:sqs:eu-central-1:[ACCOUNT_ID]:timecapsule-dev-mail"
+mail_queue_url = "https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/timecapsule-dev-mail"
+mailer_function_arn = "arn:aws:lambda:eu-central-1:[ACCOUNT_ID]:function:timecapsule-dev-mailer"
+opener_function_arn = "arn:aws:lambda:eu-central-1:[ACCOUNT_ID]:function:timecapsule-dev-opener"
+scheduler_name = "timecapsule-dev-open-capsules"
+topic_arn = "arn:aws:sns:eu-central-1:[ACCOUNT_ID]:timecapsule-dev-events"

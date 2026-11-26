@@ -1,0 +1,9 @@
+$ tofu apply -input=false -no-color /tmp/opencode/lab7-address.plan
+aws_eip.app: Creating...
+aws_eip.app: Creation complete after 3s [id=eipalloc-09ccaa98b746652e4]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+app_public_ip = "3.126.73.157"

@@ -1,0 +1,390 @@
+$ tofu destroy -input=false -auto-approve -no-color
+aws_iam_role.worker: Refreshing state... [id=lab7-review-worker-role]
+aws_sns_topic.reviews: Refreshing state... [id=arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews]
+aws_sqs_queue.dlq: Refreshing state... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-dlq]
+aws_cloudwatch_log_group.worker: Refreshing state... [id=/aws/lambda/lab7-review-worker]
+aws_sqs_queue.reviews: Refreshing state... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue]
+aws_sns_topic_subscription.email: Refreshing state... [id=arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews:d755b331-13eb-4211-84da-3fed41f51453]
+aws_sqs_queue_policy.reviews: Refreshing state... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue]
+aws_sns_topic_subscription.queue: Refreshing state... [id=arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews:707db0fd-ec1f-41bc-b102-6894d7a5c945]
+aws_iam_role_policy_attachment.worker: Refreshing state... [id=lab7-review-worker-role/arn:aws:iam::aws:policy/service-role/AWSLambdaSQSQueueExecutionRole]
+aws_lambda_function.worker: Refreshing state... [id=lab7-review-worker]
+aws_lambda_event_source_mapping.reviews: Refreshing state... [id=6fc81deb-0def-453e-bd6f-e3cb6689f41d]
+
+OpenTofu used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+OpenTofu will perform the following actions:
+
+  # aws_cloudwatch_log_group.worker will be destroyed
+  - resource "aws_cloudwatch_log_group" "worker" {
+      - arn                         = "arn:aws:logs:eu-central-1:[ACCOUNT_ID]:log-group:/aws/lambda/lab7-review-worker" -> null
+      - deletion_protection_enabled = false -> null
+      - id                          = "/aws/lambda/lab7-review-worker" -> null
+      - log_group_class             = "STANDARD" -> null
+      - name                        = "/aws/lambda/lab7-review-worker" -> null
+      - region                      = "eu-central-1" -> null
+      - retention_in_days           = 7 -> null
+      - skip_destroy                = false -> null
+      - tags                        = {} -> null
+      - tags_all                    = {
+          - "Lab" = "lab7"
+        } -> null
+    }
+
+  # aws_iam_role.worker will be destroyed
+  - resource "aws_iam_role" "worker" {
+      - arn                   = "arn:aws:iam::[ACCOUNT_ID]:role/lab7-review-worker-role" -> null
+      - assume_role_policy    = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action    = "sts:AssumeRole"
+                      - Effect    = "Allow"
+                      - Principal = {
+                          - Service = "lambda.amazonaws.com"
+                        }
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - create_date           = "2026-11-26T22:14:54Z" -> null
+      - force_detach_policies = false -> null
+      - id                    = "lab7-review-worker-role" -> null
+      - managed_policy_arns   = [
+          - "arn:aws:iam::aws:policy/service-role/AWSLambdaSQSQueueExecutionRole",
+        ] -> null
+      - max_session_duration  = 3600 -> null
+      - name                  = "lab7-review-worker-role" -> null
+      - path                  = "/" -> null
+      - tags                  = {} -> null
+      - tags_all              = {
+          - "Lab" = "lab7"
+        } -> null
+      - unique_id             = "AROAX4W2M5IJ4AOIJ2GAW" -> null
+    }
+
+  # aws_iam_role_policy_attachment.worker will be destroyed
+  - resource "aws_iam_role_policy_attachment" "worker" {
+      - id         = "lab7-review-worker-role/arn:aws:iam::aws:policy/service-role/AWSLambdaSQSQueueExecutionRole" -> null
+      - policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaSQSQueueExecutionRole" -> null
+      - role       = "lab7-review-worker-role" -> null
+    }
+
+  # aws_lambda_event_source_mapping.reviews will be destroyed
+  - resource "aws_lambda_event_source_mapping" "reviews" {
+      - arn                                = "arn:aws:lambda:eu-central-1:[ACCOUNT_ID]:event-source-mapping:6fc81deb-0def-453e-bd6f-e3cb6689f41d" -> null
+      - batch_size                         = 1 -> null
+      - bisect_batch_on_function_error     = false -> null
+      - enabled                            = true -> null
+      - event_source_arn                   = "arn:aws:sqs:eu-central-1:[ACCOUNT_ID]:lab7-reviews-queue" -> null
+      - function_arn                       = "arn:aws:lambda:eu-central-1:[ACCOUNT_ID]:function:lab7-review-worker" -> null
+      - function_name                      = "arn:aws:lambda:eu-central-1:[ACCOUNT_ID]:function:lab7-review-worker" -> null
+      - function_response_types            = [] -> null
+      - id                                 = "6fc81deb-0def-453e-bd6f-e3cb6689f41d" -> null
+      - last_modified                      = "2026-11-26T22:20:00Z" -> null
+      - maximum_batching_window_in_seconds = 0 -> null
+      - maximum_record_age_in_seconds      = 0 -> null
+      - maximum_retry_attempts             = 0 -> null
+      - parallelization_factor             = 0 -> null
+      - queues                             = [] -> null
+      - region                             = "eu-central-1" -> null
+      - state                              = "Enabled" -> null
+      - state_transition_reason            = "USER_INITIATED" -> null
+      - tags                               = {} -> null
+      - tags_all                           = {
+          - "Lab" = "lab7"
+        } -> null
+      - topics                             = [] -> null
+      - tumbling_window_in_seconds         = 0 -> null
+      - uuid                               = "6fc81deb-0def-453e-bd6f-e3cb6689f41d" -> null
+    }
+
+  # aws_lambda_function.worker will be destroyed
+  - resource "aws_lambda_function" "worker" {
+      - architectures                  = [
+          - "x86_64",
+        ] -> null
+      - arn                            = "arn:aws:lambda:eu-central-1:[ACCOUNT_ID]:function:lab7-review-worker" -> null
+      - code_sha256                    = "fhrgnKXCe1Rnka/vFSFgGGZ00H0ByphDaG21C00aIM0=" -> null
+      - filename                       = "./worker.zip" -> null
+      - function_name                  = "lab7-review-worker" -> null
+      - handler                        = "worker.handler" -> null
+      - id                             = "lab7-review-worker" -> null
+      - invoke_arn                     = "arn:aws:apigateway:eu-central-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-central-1:[ACCOUNT_ID]:function:lab7-review-worker/invocations" -> null
+      - last_modified                  = "2026-11-26T22:21:59.000+0000" -> null
+      - layers                         = [] -> null
+      - memory_size                    = 128 -> null
+      - package_type                   = "Zip" -> null
+      - publish                        = false -> null
+      - qualified_arn                  = "arn:aws:lambda:eu-central-1:[ACCOUNT_ID]:function:lab7-review-worker:$LATEST" -> null
+      - qualified_invoke_arn           = "arn:aws:apigateway:eu-central-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-central-1:[ACCOUNT_ID]:function:lab7-review-worker:$LATEST/invocations" -> null
+      - region                         = "eu-central-1" -> null
+      - reserved_concurrent_executions = -1 -> null
+      - response_streaming_invoke_arn  = "arn:aws:apigateway:eu-central-1:lambda:path/2021-11-15/functions/arn:aws:lambda:eu-central-1:[ACCOUNT_ID]:function:lab7-review-worker/response-streaming-invocations" -> null
+      - role                           = "arn:aws:iam::[ACCOUNT_ID]:role/lab7-review-worker-role" -> null
+      - runtime                        = "python3.13" -> null
+      - skip_destroy                   = false -> null
+      - source_code_hash               = "fhrgnKXCe1Rnka/vFSFgGGZ00H0ByphDaG21C00aIM0=" -> null
+      - source_code_size               = 362 -> null
+      - tags                           = {} -> null
+      - tags_all                       = {
+          - "Lab" = "lab7"
+        } -> null
+      - timeout                        = 10 -> null
+      - version                        = "$LATEST" -> null
+
+      - ephemeral_storage {
+          - size = 512 -> null
+        }
+
+      - logging_config {
+          - log_format = "Text" -> null
+          - log_group  = "/aws/lambda/lab7-review-worker" -> null
+        }
+
+      - tracing_config {
+          - mode = "PassThrough" -> null
+        }
+    }
+
+  # aws_sns_topic.reviews will be destroyed
+  - resource "aws_sns_topic" "reviews" {
+      - application_success_feedback_sample_rate = 0 -> null
+      - arn                                      = "arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews" -> null
+      - content_based_deduplication              = false -> null
+      - fifo_topic                               = false -> null
+      - firehose_success_feedback_sample_rate    = 0 -> null
+      - http_success_feedback_sample_rate        = 0 -> null
+      - id                                       = "arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews" -> null
+      - lambda_success_feedback_sample_rate      = 0 -> null
+      - maximum_message_size                     = 0 -> null
+      - name                                     = "lab7-reviews" -> null
+      - owner                                    = "[ACCOUNT_ID]" -> null
+      - policy                                   = jsonencode(
+            {
+              - Id        = "__default_policy_ID"
+              - Statement = [
+                  - {
+                      - Action    = [
+                          - "SNS:GetTopicAttributes",
+                          - "SNS:SetTopicAttributes",
+                          - "SNS:AddPermission",
+                          - "SNS:RemovePermission",
+                          - "SNS:DeleteTopic",
+                          - "SNS:Subscribe",
+                          - "SNS:ListSubscriptionsByTopic",
+                          - "SNS:Publish",
+                        ]
+                      - Condition = {
+                          - StringEquals = {
+                              - "AWS:SourceOwner" = "[ACCOUNT_ID]"
+                            }
+                        }
+                      - Effect    = "Allow"
+                      - Principal = {
+                          - AWS = "*"
+                        }
+                      - Resource  = "arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews"
+                      - Sid       = "__default_statement_ID"
+                    },
+                ]
+              - Version   = "2008-10-17"
+            }
+        ) -> null
+      - region                                   = "eu-central-1" -> null
+      - signature_version                        = 0 -> null
+      - sqs_success_feedback_sample_rate         = 0 -> null
+      - tags                                     = {} -> null
+      - tags_all                                 = {
+          - "Lab" = "lab7"
+        } -> null
+    }
+
+  # aws_sns_topic_subscription.email will be destroyed
+  - resource "aws_sns_topic_subscription" "email" {
+      - arn                             = "arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews:d755b331-13eb-4211-84da-3fed41f51453" -> null
+      - confirmation_timeout_in_minutes = 1 -> null
+      - confirmation_was_authenticated  = false -> null
+      - endpoint                        = (sensitive value) -> null
+      - endpoint_auto_confirms          = false -> null
+      - filter_policy                   = jsonencode(
+            {
+              - rating = [
+                  - {
+                      - numeric = [
+                          - "<",
+                          - 3,
+                        ]
+                    },
+                ]
+            }
+        ) -> null
+      - filter_policy_scope             = "MessageAttributes" -> null
+      - id                              = "arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews:d755b331-13eb-4211-84da-3fed41f51453" -> null
+      - owner_id                        = "[ACCOUNT_ID]" -> null
+      - pending_confirmation            = false -> null
+      - protocol                        = "email" -> null
+      - raw_message_delivery            = false -> null
+      - region                          = "eu-central-1" -> null
+      - topic_arn                       = "arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews" -> null
+    }
+
+  # aws_sns_topic_subscription.queue will be destroyed
+  - resource "aws_sns_topic_subscription" "queue" {
+      - arn                             = "arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews:707db0fd-ec1f-41bc-b102-6894d7a5c945" -> null
+      - confirmation_timeout_in_minutes = 1 -> null
+      - confirmation_was_authenticated  = true -> null
+      - endpoint                        = "arn:aws:sqs:eu-central-1:[ACCOUNT_ID]:lab7-reviews-queue" -> null
+      - endpoint_auto_confirms          = false -> null
+      - id                              = "arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews:707db0fd-ec1f-41bc-b102-6894d7a5c945" -> null
+      - owner_id                        = "[ACCOUNT_ID]" -> null
+      - pending_confirmation            = false -> null
+      - protocol                        = "sqs" -> null
+      - raw_message_delivery            = true -> null
+      - region                          = "eu-central-1" -> null
+      - topic_arn                       = "arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews" -> null
+    }
+
+  # aws_sqs_queue.dlq will be destroyed
+  - resource "aws_sqs_queue" "dlq" {
+      - arn                               = "arn:aws:sqs:eu-central-1:[ACCOUNT_ID]:lab7-reviews-dlq" -> null
+      - content_based_deduplication       = false -> null
+      - delay_seconds                     = 0 -> null
+      - fifo_queue                        = false -> null
+      - id                                = "https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-dlq" -> null
+      - kms_data_key_reuse_period_seconds = 300 -> null
+      - max_message_size                  = 262144 -> null
+      - message_retention_seconds         = 1209600 -> null
+      - name                              = "lab7-reviews-dlq" -> null
+      - receive_wait_time_seconds         = 0 -> null
+      - region                            = "eu-central-1" -> null
+      - sqs_managed_sse_enabled           = true -> null
+      - tags                              = {} -> null
+      - tags_all                          = {
+          - "Lab" = "lab7"
+        } -> null
+      - url                               = "https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-dlq" -> null
+      - visibility_timeout_seconds        = 30 -> null
+    }
+
+  # aws_sqs_queue.reviews will be destroyed
+  - resource "aws_sqs_queue" "reviews" {
+      - arn                               = "arn:aws:sqs:eu-central-1:[ACCOUNT_ID]:lab7-reviews-queue" -> null
+      - content_based_deduplication       = false -> null
+      - delay_seconds                     = 0 -> null
+      - fifo_queue                        = false -> null
+      - id                                = "https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue" -> null
+      - kms_data_key_reuse_period_seconds = 300 -> null
+      - max_message_size                  = 262144 -> null
+      - message_retention_seconds         = 345600 -> null
+      - name                              = "lab7-reviews-queue" -> null
+      - policy                            = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action    = "sqs:SendMessage"
+                      - Condition = {
+                          - ArnEquals = {
+                              - "aws:SourceArn" = "arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews"
+                            }
+                        }
+                      - Effect    = "Allow"
+                      - Principal = {
+                          - Service = "sns.amazonaws.com"
+                        }
+                      - Resource  = "arn:aws:sqs:eu-central-1:[ACCOUNT_ID]:lab7-reviews-queue"
+                      - Sid       = "OnlyReviewsTopic"
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - receive_wait_time_seconds         = 0 -> null
+      - redrive_policy                    = jsonencode(
+            {
+              - deadLetterTargetArn = "arn:aws:sqs:eu-central-1:[ACCOUNT_ID]:lab7-reviews-dlq"
+              - maxReceiveCount     = 3
+            }
+        ) -> null
+      - region                            = "eu-central-1" -> null
+      - sqs_managed_sse_enabled           = true -> null
+      - tags                              = {} -> null
+      - tags_all                          = {
+          - "Lab" = "lab7"
+        } -> null
+      - url                               = "https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue" -> null
+      - visibility_timeout_seconds        = 60 -> null
+    }
+
+  # aws_sqs_queue_policy.reviews will be destroyed
+  - resource "aws_sqs_queue_policy" "reviews" {
+      - id        = "https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue" -> null
+      - policy    = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action    = "sqs:SendMessage"
+                      - Condition = {
+                          - ArnEquals = {
+                              - "aws:SourceArn" = "arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews"
+                            }
+                        }
+                      - Effect    = "Allow"
+                      - Principal = {
+                          - Service = "sns.amazonaws.com"
+                        }
+                      - Resource  = "arn:aws:sqs:eu-central-1:[ACCOUNT_ID]:lab7-reviews-queue"
+                      - Sid       = "OnlyReviewsTopic"
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - queue_url = "https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue" -> null
+      - region    = "eu-central-1" -> null
+    }
+
+Plan: 0 to add, 0 to change, 11 to destroy.
+
+Changes to Outputs:
+  - dlq_url   = "https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-dlq" -> null
+  - queue_url = "https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue" -> null
+  - topic_arn = "arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews" -> null
+aws_sns_topic_subscription.queue: Destroying... [id=arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews:707db0fd-ec1f-41bc-b102-6894d7a5c945]
+aws_sns_topic_subscription.email: Destroying... [id=arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews:d755b331-13eb-4211-84da-3fed41f51453]
+aws_lambda_event_source_mapping.reviews: Destroying... [id=6fc81deb-0def-453e-bd6f-e3cb6689f41d]
+aws_sns_topic_subscription.email: Destruction complete after 1s
+aws_sns_topic_subscription.queue: Destruction complete after 1s
+aws_sqs_queue_policy.reviews: Destroying... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue]
+aws_lambda_event_source_mapping.reviews: Still destroying... [id=6fc81deb-0def-453e-bd6f-e3cb6689f41d, 10s elapsed]
+aws_sqs_queue_policy.reviews: Still destroying... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue, 10s elapsed]
+aws_lambda_event_source_mapping.reviews: Destruction complete after 14s
+aws_lambda_function.worker: Destroying... [id=lab7-review-worker]
+aws_lambda_function.worker: Destruction complete after 6s
+aws_cloudwatch_log_group.worker: Destroying... [id=/aws/lambda/lab7-review-worker]
+aws_iam_role_policy_attachment.worker: Destroying... [id=lab7-review-worker-role/arn:aws:iam::aws:policy/service-role/AWSLambdaSQSQueueExecutionRole]
+aws_cloudwatch_log_group.worker: Destruction complete after 0s
+aws_iam_role_policy_attachment.worker: Destruction complete after 0s
+aws_iam_role.worker: Destroying... [id=lab7-review-worker-role]
+aws_sqs_queue_policy.reviews: Still destroying... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue, 20s elapsed]
+aws_iam_role.worker: Destruction complete after 1s
+aws_sqs_queue_policy.reviews: Destruction complete after 26s
+aws_sqs_queue.reviews: Destroying... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue]
+aws_sns_topic.reviews: Destroying... [id=arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews]
+aws_sns_topic.reviews: Destruction complete after 0s
+aws_sqs_queue.reviews: Still destroying... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue, 10s elapsed]
+aws_sqs_queue.reviews: Still destroying... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue, 20s elapsed]
+aws_sqs_queue.reviews: Still destroying... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue, 30s elapsed]
+aws_sqs_queue.reviews: Still destroying... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue, 40s elapsed]
+aws_sqs_queue.reviews: Destruction complete after 43s
+aws_sqs_queue.dlq: Destroying... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-dlq]
+aws_sqs_queue.dlq: Still destroying... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-dlq, 10s elapsed]
+aws_sqs_queue.dlq: Still destroying... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-dlq, 20s elapsed]
+aws_sqs_queue.dlq: Still destroying... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-dlq, 30s elapsed]
+aws_sqs_queue.dlq: Still destroying... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-dlq, 40s elapsed]
+aws_sqs_queue.dlq: Destruction complete after 44s
+
+Destroy complete! Resources: 11 destroyed.

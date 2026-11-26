@@ -1,0 +1,38 @@
+$ tofu apply -input=false -no-color /tmp/opencode/lab7-reviews.plan
+aws_cloudwatch_log_group.worker: Creating...
+aws_sqs_queue.dlq: Creating...
+aws_iam_role.worker: Creating...
+aws_sns_topic.reviews: Creating...
+aws_cloudwatch_log_group.worker: Creation complete after 1s [id=/aws/lambda/lab7-review-worker]
+aws_sns_topic.reviews: Creation complete after 2s [id=arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews]
+aws_sns_topic_subscription.email: Creating...
+aws_sns_topic_subscription.email: Creation complete after 0s [id=arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews:d755b331-13eb-4211-84da-3fed41f51453]
+aws_iam_role.worker: Creation complete after 2s [id=lab7-review-worker-role]
+aws_iam_role_policy_attachment.worker: Creating...
+aws_iam_role_policy_attachment.worker: Creation complete after 1s [id=lab7-review-worker-role/arn:aws:iam::aws:policy/service-role/AWSLambdaSQSQueueExecutionRole]
+aws_lambda_function.worker: Creating...
+aws_sqs_queue.dlq: Still creating... [10s elapsed]
+aws_lambda_function.worker: Still creating... [10s elapsed]
+aws_lambda_function.worker: Creation complete after 15s [id=lab7-review-worker]
+aws_sqs_queue.dlq: Still creating... [20s elapsed]
+aws_sqs_queue.dlq: Creation complete after 26s [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-dlq]
+aws_sqs_queue.reviews: Creating...
+aws_sqs_queue.reviews: Still creating... [10s elapsed]
+aws_sqs_queue.reviews: Still creating... [20s elapsed]
+aws_sqs_queue.reviews: Creation complete after 26s [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue]
+aws_sqs_queue_policy.reviews: Creating...
+aws_lambda_event_source_mapping.reviews: Creating...
+aws_lambda_event_source_mapping.reviews: Creation complete after 1s [id=6fc81deb-0def-453e-bd6f-e3cb6689f41d]
+aws_sqs_queue_policy.reviews: Still creating... [10s elapsed]
+aws_sqs_queue_policy.reviews: Still creating... [20s elapsed]
+aws_sqs_queue_policy.reviews: Creation complete after 26s [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue]
+aws_sns_topic_subscription.queue: Creating...
+aws_sns_topic_subscription.queue: Creation complete after 1s [id=arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews:707db0fd-ec1f-41bc-b102-6894d7a5c945]
+
+Apply complete! Resources: 11 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+dlq_url = "https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-dlq"
+queue_url = "https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue"
+topic_arn = "arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews"

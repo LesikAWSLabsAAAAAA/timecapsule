@@ -1,0 +1,38 @@
+$ tofu apply -input=false -auto-approve -no-color -var=enable_trigger=false
+aws_cloudwatch_log_group.worker: Refreshing state... [id=/aws/lambda/lab7-review-worker]
+aws_iam_role.worker: Refreshing state... [id=lab7-review-worker-role]
+aws_sns_topic.reviews: Refreshing state... [id=arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews]
+aws_sqs_queue.dlq: Refreshing state... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-dlq]
+aws_sqs_queue.reviews: Refreshing state... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue]
+aws_sns_topic_subscription.email: Refreshing state... [id=arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews:d755b331-13eb-4211-84da-3fed41f51453]
+aws_sqs_queue_policy.reviews: Refreshing state... [id=https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue]
+aws_sns_topic_subscription.queue: Refreshing state... [id=arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews:707db0fd-ec1f-41bc-b102-6894d7a5c945]
+aws_iam_role_policy_attachment.worker: Refreshing state... [id=lab7-review-worker-role/arn:aws:iam::aws:policy/service-role/AWSLambdaSQSQueueExecutionRole]
+aws_lambda_function.worker: Refreshing state... [id=lab7-review-worker]
+aws_lambda_event_source_mapping.reviews: Refreshing state... [id=6fc81deb-0def-453e-bd6f-e3cb6689f41d]
+
+OpenTofu used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place (current -> planned)
+
+OpenTofu will perform the following actions:
+
+  # aws_lambda_event_source_mapping.reviews will be updated in-place
+  ~ resource "aws_lambda_event_source_mapping" "reviews" {
+      ~ enabled                            = true -> false
+        id                                 = "6fc81deb-0def-453e-bd6f-e3cb6689f41d"
+        tags                               = {}
+        # (20 unchanged attributes hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+aws_lambda_event_source_mapping.reviews: Modifying... [id=6fc81deb-0def-453e-bd6f-e3cb6689f41d]
+aws_lambda_event_source_mapping.reviews: Modifications complete after 2s [id=6fc81deb-0def-453e-bd6f-e3cb6689f41d]
+
+Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+
+Outputs:
+
+dlq_url = "https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-dlq"
+queue_url = "https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/lab7-reviews-queue"
+topic_arn = "arn:aws:sns:eu-central-1:[ACCOUNT_ID]:lab7-reviews"

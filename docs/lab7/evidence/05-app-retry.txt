@@ -1,0 +1,66 @@
+$ tofu apply -input=false -no-color /tmp/opencode/lab7-app-retry.plan
+aws_lambda_function.app["opener"]: Destroying... [id=timecapsule-dev-opener]
+aws_lambda_function.app["mailer"]: Destroying... [id=timecapsule-dev-mailer]
+aws_lambda_function.app["opener"]: Destruction complete after 5s
+aws_lambda_function.app["opener"]: Creating...
+aws_lambda_function.app["mailer"]: Destruction complete after 5s
+aws_lambda_function.app["mailer"]: Creating...
+aws_lambda_function.app["opener"]: Still creating... [10s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [10s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [20s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [20s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [30s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [30s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [40s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [40s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [50s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [50s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [1m0s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [1m0s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [1m10s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [1m10s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [1m20s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [1m20s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [1m30s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [1m30s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [1m40s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [1m40s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [1m50s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [1m50s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [2m0s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [2m0s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [2m10s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [2m10s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [2m20s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [2m20s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [2m30s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [2m30s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [2m40s elapsed]
+aws_lambda_function.app["opener"]: Still creating... [2m40s elapsed]
+aws_lambda_function.app["opener"]: Creation complete after 2m46s [id=timecapsule-dev-opener]
+aws_lambda_function_event_invoke_config.opener: Creating...
+aws_iam_role_policy.scheduler: Creating...
+aws_iam_role_policy.scheduler: Creation complete after 1s [id=timecapsule-dev-lab7-opener-scheduler-role:invoke-opener]
+aws_lambda_function.app["mailer"]: Still creating... [2m50s elapsed]
+aws_lambda_function_event_invoke_config.opener: Creation complete after 6s [id=timecapsule-dev-opener]
+aws_scheduler_schedule.opener: Creating...
+aws_scheduler_schedule.opener: Creation complete after 1s [id=default/timecapsule-dev-open-capsules]
+aws_lambda_function.app["mailer"]: Still creating... [3m0s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [3m10s elapsed]
+aws_lambda_function.app["mailer"]: Still creating... [3m20s elapsed]
+aws_lambda_function.app["mailer"]: Creation complete after 3m29s [id=timecapsule-dev-mailer]
+aws_lambda_event_source_mapping.mail: Creating...
+aws_lambda_event_source_mapping.mail: Creation complete after 1s [id=d95a7401-1d62-4a2e-825a-2c863ea7bc97]
+
+Apply complete! Resources: 6 added, 0 changed, 2 destroyed.
+
+Outputs:
+
+mail_dlq_url = "https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/timecapsule-dev-mail-dlq"
+mail_event_source_mapping_uuid = "d95a7401-1d62-4a2e-825a-2c863ea7bc97"
+mail_queue_arn = "arn:aws:sqs:eu-central-1:[ACCOUNT_ID]:timecapsule-dev-mail"
+mail_queue_url = "https://sqs.eu-central-1.amazonaws.com/[ACCOUNT_ID]/timecapsule-dev-mail"
+mailer_function_arn = "arn:aws:lambda:eu-central-1:[ACCOUNT_ID]:function:timecapsule-dev-mailer"
+opener_function_arn = "arn:aws:lambda:eu-central-1:[ACCOUNT_ID]:function:timecapsule-dev-opener"
+scheduler_name = "timecapsule-dev-open-capsules"
+topic_arn = "arn:aws:sns:eu-central-1:[ACCOUNT_ID]:timecapsule-dev-events"
