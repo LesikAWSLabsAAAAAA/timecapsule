@@ -1,0 +1,76 @@
+aws_db_subnet_group.app: Creating...
+aws_iam_role.scheduler: Creating...
+aws_security_group.rds: Creating...
+aws_db_subnet_group.app: Creation complete after 1s [id=timecapsule-dev-db-subnets]
+aws_security_group.rds: Creation complete after 3s [id=sg-0e3274ffa139d6ce9]
+aws_db_instance.app: Creating...
+aws_iam_role.scheduler: Creation complete after 4s [id=timecapsule-dev-scheduler-role]
+aws_db_instance.app: Still creating... [10s elapsed]
+aws_db_instance.app: Still creating... [20s elapsed]
+aws_db_instance.app: Still creating... [30s elapsed]
+aws_db_instance.app: Still creating... [40s elapsed]
+aws_db_instance.app: Still creating... [50s elapsed]
+aws_db_instance.app: Still creating... [1m0s elapsed]
+aws_db_instance.app: Still creating... [1m10s elapsed]
+aws_db_instance.app: Still creating... [1m20s elapsed]
+aws_db_instance.app: Still creating... [1m30s elapsed]
+aws_db_instance.app: Still creating... [1m40s elapsed]
+aws_db_instance.app: Still creating... [1m50s elapsed]
+aws_db_instance.app: Still creating... [2m0s elapsed]
+aws_db_instance.app: Still creating... [2m10s elapsed]
+aws_db_instance.app: Still creating... [2m20s elapsed]
+aws_db_instance.app: Still creating... [2m30s elapsed]
+aws_db_instance.app: Still creating... [2m40s elapsed]
+aws_db_instance.app: Still creating... [2m50s elapsed]
+aws_db_instance.app: Still creating... [3m0s elapsed]
+aws_db_instance.app: Still creating... [3m10s elapsed]
+aws_db_instance.app: Still creating... [3m20s elapsed]
+aws_db_instance.app: Still creating... [3m30s elapsed]
+aws_db_instance.app: Still creating... [3m40s elapsed]
+aws_db_instance.app: Still creating... [3m50s elapsed]
+aws_db_instance.app: Still creating... [4m0s elapsed]
+aws_db_instance.app: Still creating... [4m10s elapsed]
+aws_db_instance.app: Still creating... [4m20s elapsed]
+aws_db_instance.app: Still creating... [4m30s elapsed]
+aws_db_instance.app: Still creating... [4m40s elapsed]
+aws_db_instance.app: Still creating... [4m50s elapsed]
+aws_db_instance.app: Still creating... [5m0s elapsed]
+aws_db_instance.app: Still creating... [5m10s elapsed]
+aws_db_instance.app: Still creating... [5m20s elapsed]
+aws_db_instance.app: Still creating... [5m30s elapsed]
+aws_db_instance.app: Still creating... [5m40s elapsed]
+aws_db_instance.app: Still creating... [5m50s elapsed]
+aws_db_instance.app: Still creating... [6m0s elapsed]
+aws_db_instance.app: Still creating... [6m10s elapsed]
+aws_db_instance.app: Still creating... [6m20s elapsed]
+aws_db_instance.app: Still creating... [6m30s elapsed]
+aws_db_instance.app: Still creating... [6m40s elapsed]
+aws_db_instance.app: Still creating... [6m50s elapsed]
+aws_db_instance.app: Still creating... [7m0s elapsed]
+aws_db_instance.app: Still creating... [7m10s elapsed]
+aws_db_instance.app: Still creating... [7m20s elapsed]
+aws_db_instance.app: Still creating... [7m30s elapsed]
+aws_db_instance.app: Still creating... [7m40s elapsed]
+aws_db_instance.app: Creation complete after 7m41s [id=db-RYHEN2EXRPJPVG4UNVCY5ONZCE]
+aws_iam_policy.rds_stop: Creating...
+aws_iam_policy.rds_stop: Creation complete after 4s [id=arn:aws:iam::<account>:policy/timecapsule-dev-rds-stop]
+aws_iam_role_policy_attachment.rds_stop: Creating...
+aws_iam_role_policy_attachment.rds_stop: Creation complete after 1s [id=timecapsule-dev-scheduler-role/arn:aws:iam::<account>:policy/timecapsule-dev-rds-stop]
+aws_scheduler_schedule.nightly_stop: Creating...
+aws_scheduler_schedule.nightly_stop: Creation complete after 0s [id=default/timecapsule-dev-rds-nightly-stop]
+
+Apply complete! Resources: 7 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+database_dns_name = "db.timecapsule.internal"
+db_address = "timecapsule-dev-rds.cpwgmyac0gll.eu-central-1.rds.amazonaws.com"
+db_endpoint = "timecapsule-dev-rds.cpwgmyac0gll.eu-central-1.rds.amazonaws.com:5432"
+db_engine_version_actual = "16.13"
+db_instance_arn = "arn:aws:rds:eu-central-1:<account>:db:timecapsule-dev-rds"
+db_instance_id = "timecapsule-dev-rds"
+db_port = 5432
+db_subnet_group_name = "timecapsule-dev-db-subnets"
+rds_security_group_id = "sg-0e3274ffa139d6ce9"
+scheduler_role_arn = "arn:aws:iam::<account>:role/timecapsule-dev-scheduler-role"
+stop_schedule_name = "timecapsule-dev-rds-nightly-stop"

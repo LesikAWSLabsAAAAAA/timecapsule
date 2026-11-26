@@ -1,0 +1,119 @@
+data.aws_instance.web: Reading...
+data.aws_vpc.main: Reading...
+data.aws_vpc.main: Read complete after 1s [id=vpc-0c2a85d598f3f550f]
+data.aws_subnet.private_b: Reading...
+data.aws_subnet.private_a: Reading...
+aws_security_group.web: Refreshing state... [id=sg-024a972acbc650da7]
+data.aws_subnet.private_a: Read complete after 0s [id=subnet-07f5ef7beff7f7001]
+data.aws_subnet.private_b: Read complete after 0s [id=subnet-03e7191c3a832cb62]
+aws_db_subnet_group.lab5: Refreshing state... [id=lab5-db-subnets]
+aws_security_group.rds: Refreshing state... [id=sg-0c5ce3e13ca7191bf]
+data.aws_instance.web: Read complete after 2s [id=i-0a75775b81fa8004c]
+aws_network_interface_sg_attachment.web: Refreshing state... [id=sg-024a972acbc650da7_eni-082e64514681ae2e2]
+
+OpenTofu used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+OpenTofu will perform the following actions:
+
+  # aws_db_instance.sandbox will be created
+  + resource "aws_db_instance" "sandbox" {
+      + address                               = (known after apply)
+      + allocated_storage                     = 20
+      + apply_immediately                     = true
+      + arn                                   = (known after apply)
+      + auto_minor_version_upgrade            = true
+      + availability_zone                     = "eu-central-1a"
+      + backup_retention_period               = 1
+      + backup_target                         = (known after apply)
+      + backup_window                         = "01:00-01:30"
+      + ca_cert_identifier                    = (known after apply)
+      + character_set_name                    = (known after apply)
+      + copy_tags_to_snapshot                 = true
+      + database_insights_mode                = (known after apply)
+      + db_name                               = "lab5"
+      + db_subnet_group_name                  = "lab5-db-subnets"
+      + dedicated_log_volume                  = false
+      + delete_automated_backups              = true
+      + deletion_protection                   = true
+      + domain_fqdn                           = (known after apply)
+      + endpoint                              = (known after apply)
+      + engine                                = "postgres"
+      + engine_lifecycle_support              = (known after apply)
+      + engine_version                        = "16"
+      + engine_version_actual                 = (known after apply)
+      + hosted_zone_id                        = (known after apply)
+      + id                                    = (known after apply)
+      + identifier                            = "lab5-db"
+      + identifier_prefix                     = (known after apply)
+      + instance_class                        = "db.t4g.micro"
+      + iops                                  = (known after apply)
+      + kms_key_id                            = (known after apply)
+      + latest_restorable_time                = (known after apply)
+      + license_model                         = (known after apply)
+      + listener_endpoint                     = (known after apply)
+      + maintenance_window                    = "sun:03:00-sun:03:30"
+      + master_user_secret                    = (known after apply)
+      + master_user_secret_kms_key_id         = (known after apply)
+      + max_allocated_storage                 = 0
+      + monitoring_interval                   = 0
+      + monitoring_role_arn                   = (known after apply)
+      + multi_az                              = false
+      + multi_tenant                          = (known after apply)
+      + nchar_character_set_name              = (known after apply)
+      + network_type                          = (known after apply)
+      + option_group_name                     = (known after apply)
+      + parameter_group_name                  = (known after apply)
+      + password_wo                           = (write-only attribute)
+      + password_wo_version                   = 1
+      + performance_insights_enabled          = false
+      + performance_insights_kms_key_id       = (known after apply)
+      + performance_insights_retention_period = (known after apply)
+      + port                                  = 5432
+      + publicly_accessible                   = false
+      + region                                = "eu-central-1"
+      + replica_mode                          = (known after apply)
+      + replicas                              = (known after apply)
+      + resource_id                           = (known after apply)
+      + skip_final_snapshot                   = true
+      + snapshot_identifier                   = (known after apply)
+      + status                                = (known after apply)
+      + storage_encrypted                     = true
+      + storage_throughput                    = (known after apply)
+      + storage_type                          = "gp3"
+      + tags                                  = {
+          + "Lab"  = "lab5"
+          + "Name" = "lab5-db"
+        }
+      + tags_all                              = {
+          + "Lab"  = "lab5"
+          + "Name" = "lab5-db"
+        }
+      + timezone                              = (known after apply)
+      + upgrade_rollout_order                 = (known after apply)
+      + username                              = "dbadmin"
+      + vpc_security_group_ids                = [
+          + "sg-0c5ce3e13ca7191bf",
+        ]
+
+      + timeouts {
+          + create = "60m"
+          + delete = "60m"
+          + update = "60m"
+        }
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + sandbox_address               = (known after apply)
+  + sandbox_endpoint              = (known after apply)
+  + sandbox_engine_version_actual = (known after apply)
+
+─────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: <private-plan-dir>/free.tfplan
+
+To perform exactly these actions, run the following command to apply:
+    tofu apply "<private-plan-dir>/free.tfplan"

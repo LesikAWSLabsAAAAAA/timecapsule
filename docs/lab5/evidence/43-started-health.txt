@@ -1,0 +1,32 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+2026-11-26T20:15:29Z 
+{"status":"error","db":"error","hint":"Cannot connect to the database. Check DB_HOST, DB_PORT, DB_NAME, DB_USER and DB_PASSWORD.","hostname":"ip-10-18-0-165.eu-central-1.compute.internal"} HTTP 500
+2026-11-26T20:15:40Z 
+{"status":"error","db":"error","hint":"Cannot connect to the database. Check DB_HOST, DB_PORT, DB_NAME, DB_USER and DB_PASSWORD.","hostname":"ip-10-18-0-165.eu-central-1.compute.internal"} HTTP 500
+2026-11-26T20:15:51Z 
+{"status":"error","db":"error","hint":"Cannot connect to the database. Check DB_HOST, DB_PORT, DB_NAME, DB_USER and DB_PASSWORD.","hostname":"ip-10-18-0-165.eu-central-1.compute.internal"} HTTP 500
+2026-11-26T20:16:02Z 
+{"status":"error","db":"error","hint":"Cannot connect to the database. Check DB_HOST, DB_PORT, DB_NAME, DB_USER and DB_PASSWORD.","hostname":"ip-10-18-0-165.eu-central-1.compute.internal"} HTTP 500
+2026-11-26T20:16:13Z 
+{"status":"error","db":"error","hint":"Cannot connect to the database. Check DB_HOST, DB_PORT, DB_NAME, DB_USER and DB_PASSWORD.","hostname":"ip-10-18-0-165.eu-central-1.compute.internal"} HTTP 500
+2026-11-26T20:16:24Z 
+{"status":"error","db":"error","hint":"Cannot connect to the database. Check DB_HOST, DB_PORT, DB_NAME, DB_USER and DB_PASSWORD.","hostname":"ip-10-18-0-165.eu-central-1.compute.internal"} HTTP 500
+2026-11-26T20:16:35Z 
+{"status":"error","db":"error","hint":"Cannot connect to the database. Check DB_HOST, DB_PORT, DB_NAME, DB_USER and DB_PASSWORD.","hostname":"ip-10-18-0-165.eu-central-1.compute.internal"} HTTP 500
+2026-11-26T20:16:46Z 
+{"status":"error","db":"error","hint":"Cannot connect to the database. Check DB_HOST, DB_PORT, DB_NAME, DB_USER and DB_PASSWORD.","hostname":"ip-10-18-0-165.eu-central-1.compute.internal"} HTTP 500
+2026-11-26T20:16:52Z 
+{"status":"error","db":"error","hint":"Cannot connect to the database. Check DB_HOST, DB_PORT, DB_NAME, DB_USER and DB_PASSWORD.","hostname":"ip-10-18-0-165.eu-central-1.compute.internal"} HTTP 500
+2026-11-26T20:16:58Z 
+{"status":"error","db":"error","hint":"Cannot connect to the database. Check DB_HOST, DB_PORT, DB_NAME, DB_USER and DB_PASSWORD.","hostname":"ip-10-18-0-165.eu-central-1.compute.internal"} HTTP 500
+2026-11-26T20:17:04Z 
+{"status":"error","db":"error","hint":"Cannot connect to the database. Check DB_HOST, DB_PORT, DB_NAME, DB_USER and DB_PASSWORD.","hostname":"ip-10-18-0-165.eu-central-1.compute.internal"} HTTP 500
+2026-11-26T20:17:11Z 
+{"status":"ok","db":"ok","hostname":"ip-10-18-0-165.eu-central-1.compute.internal"} HTTP 200
+db.timecapsule.internal. 299	IN	CNAME	timecapsule-dev-rds.cpwgmyac0gll.eu-central-1.rds.amazonaws.com.
+timecapsule-dev-rds.cpwgmyac0gll.eu-central-1.rds.amazonaws.com. 4 IN A	10.18.10.73

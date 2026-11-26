@@ -1,0 +1,16 @@
+OpenTofu plan — excerpt
+
+# aws_db_subnet_group.lab5 will be created
+      + name                    = "lab5-db-subnets"
+      + region                  = "eu-central-1"
+      + subnet_ids              = [
+          + "subnet-03e7191c3a832cb62",
+          + "subnet-07f5ef7beff7f7001",
+
+# aws_security_group.rds will be created
+      + description            = "Lab 5 sandbox: PostgreSQL only from lab5-web-sg"
+      + ingress                = [
+              + from_port        = 5432
+              + protocol         = "tcp"
+              + to_port          = 5432
+      + name                   = "lab5-rds-sg"

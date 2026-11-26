@@ -1,0 +1,72 @@
+Replica:
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+SELECT pg_is_in_recovery();
+ pg_is_in_recovery 
+-------------------
+ t
+(1 row)
+
+SELECT * FROM notes ORDER BY id;
+ id |  body  |          created_at          
+----+--------+------------------------------
+  1 | first  | 2026-11-26 18:56:42.46829+00
+  2 | second | 2026-11-26 18:56:42.46829+00
+  3 | third  | 2026-11-26 18:56:42.46829+00
+(3 rows)
+
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+INSERT INTO notes (body) VALUES ('from replica');
+ERROR:  cannot execute INSERT in a read-only transaction
+INSERT was rejected
+
+Primary:
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+SELECT pg_is_in_recovery();
+ pg_is_in_recovery 
+-------------------
+ f
+(1 row)
+
+INSERT INTO notes (body) VALUES ('fourth');
+INSERT 0 1
+SELECT * FROM notes ORDER BY id;
+ id |  body  |          created_at           
+----+--------+-------------------------------
+  1 | first  | 2026-11-26 18:56:42.46829+00
+  2 | second | 2026-11-26 18:56:42.46829+00
+  3 | third  | 2026-11-26 18:56:42.46829+00
+  4 | fourth | 2026-11-26 19:06:26.966363+00
+(4 rows)
+
+
+Replica after primary INSERT:
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+SELECT * FROM notes ORDER BY id;
+ id |  body  |          created_at           
+----+--------+-------------------------------
+  1 | first  | 2026-11-26 18:56:42.46829+00
+  2 | second | 2026-11-26 18:56:42.46829+00
+  3 | third  | 2026-11-26 18:56:42.46829+00
+  4 | fourth | 2026-11-26 19:06:26.966363+00
+(4 rows)
+

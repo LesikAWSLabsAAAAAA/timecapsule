@@ -1,0 +1,11 @@
+OpenTofu plan — excerpt
+
+# aws_db_instance.restore[0] will be created
+      + db_subnet_group_name                  = "lab5-db-subnets"
+      + deletion_protection                   = false
+      + identifier                            = "lab5-db-restore"
+      + instance_class                        = "db.t4g.micro"
+      + publicly_accessible                   = false
+      + restore_to_point_in_time {
+          + restore_time                  = "2026-11-26T19:07:05Z"
+          + source_db_instance_identifier = "lab5-db"

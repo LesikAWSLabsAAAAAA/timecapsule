@@ -1,0 +1,49 @@
+data.aws_route53_zone.internal: Reading...
+data.aws_caller_identity.current: Reading...
+data.aws_vpc.main: Reading...
+data.aws_instance.app: Reading...
+data.aws_caller_identity.current: Read complete after 0s [id=<account>]
+data.aws_iam_policy_document.scheduler_assume_role: Reading...
+data.aws_iam_policy_document.scheduler_assume_role: Read complete after 0s [id=4205990404]
+aws_iam_role.scheduler: Refreshing state... [id=timecapsule-dev-scheduler-role]
+data.aws_vpc.main: Read complete after 1s [id=vpc-0c2a85d598f3f550f]
+data.aws_subnet.private_b: Reading...
+data.aws_subnet.private_a: Reading...
+data.aws_security_group.app: Reading...
+data.aws_route53_zone.internal: Read complete after 1s [id=Z06009461ORZ8Q53FG5UU]
+data.aws_subnet.private_a: Read complete after 1s [id=subnet-07f5ef7beff7f7001]
+data.aws_subnet.private_b: Read complete after 1s [id=subnet-03e7191c3a832cb62]
+aws_db_subnet_group.app: Refreshing state... [id=timecapsule-dev-db-subnets]
+data.aws_security_group.app: Read complete after 1s [id=sg-09440902461eb9b5d]
+aws_security_group.rds: Refreshing state... [id=sg-0e3274ffa139d6ce9]
+data.aws_instance.app: Read complete after 2s [id=i-0ab69e8474108b35c]
+aws_db_instance.app: Refreshing state... [id=db-RYHEN2EXRPJPVG4UNVCY5ONZCE]
+aws_iam_policy.rds_stop: Refreshing state... [id=arn:aws:iam::<account>:policy/timecapsule-dev-rds-stop]
+aws_route53_record.db: Refreshing state... [id=Z06009461ORZ8Q53FG5UU_db.timecapsule.internal_A]
+aws_iam_role_policy_attachment.rds_stop: Refreshing state... [id=timecapsule-dev-scheduler-role/arn:aws:iam::<account>:policy/timecapsule-dev-rds-stop]
+aws_scheduler_schedule.nightly_stop: Refreshing state... [id=default/timecapsule-dev-rds-nightly-stop]
+
+OpenTofu used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place (current -> planned)
+
+OpenTofu will perform the following actions:
+
+  # aws_scheduler_schedule.nightly_stop will be updated in-place
+  ~ resource "aws_scheduler_schedule" "nightly_stop" {
+        id                           = "default/timecapsule-dev-rds-nightly-stop"
+        name                         = "timecapsule-dev-rds-nightly-stop"
+      ~ schedule_expression          = "cron(0 23 * * ? *)" -> "at(2026-11-26T21:52:00)"
+        # (7 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: <private-plan-dir>/scheduler-test.tfplan
+
+To perform exactly these actions, run the following command to apply:
+    tofu apply "<private-plan-dir>/scheduler-test.tfplan"

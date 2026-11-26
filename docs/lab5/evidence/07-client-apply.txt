@@ -1,0 +1,15 @@
+aws_network_interface_sg_attachment.web: Destroying... [id=sg-024a972acbc650da7_eni-082e64514681ae2e2]
+aws_network_interface_sg_attachment.web: Destruction complete after 1s
+aws_network_interface_sg_attachment.web: Creating...
+aws_network_interface_sg_attachment.web: Creation complete after 1s [id=sg-024a972acbc650da7_eni-0a2c367e79b3c2259]
+
+Apply complete! Resources: 1 added, 0 changed, 1 destroyed.
+
+Outputs:
+
+client_instance_id = "i-0ab69e8474108b35c"
+replica_endpoint = ""
+restore_endpoint = ""
+sandbox_address = "lab5-db.cpwgmyac0gll.eu-central-1.rds.amazonaws.com"
+sandbox_endpoint = "lab5-db.cpwgmyac0gll.eu-central-1.rds.amazonaws.com:5432"
+sandbox_engine_version_actual = "16.13"

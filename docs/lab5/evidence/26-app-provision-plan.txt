@@ -1,0 +1,313 @@
+data.aws_vpc.main: Reading...
+data.aws_route53_zone.internal: Reading...
+data.aws_instance.app: Reading...
+data.aws_caller_identity.current: Reading...
+data.aws_caller_identity.current: Read complete after 1s [id=<account>]
+data.aws_iam_policy_document.scheduler_assume_role: Reading...
+data.aws_iam_policy_document.scheduler_assume_role: Read complete after 0s [id=4205990404]
+data.aws_vpc.main: Read complete after 1s [id=vpc-0c2a85d598f3f550f]
+data.aws_subnet.private_b: Reading...
+data.aws_security_group.app: Reading...
+data.aws_subnet.private_a: Reading...
+data.aws_subnet.private_b: Read complete after 1s [id=subnet-03e7191c3a832cb62]
+data.aws_subnet.private_a: Read complete after 1s [id=subnet-07f5ef7beff7f7001]
+data.aws_security_group.app: Read complete after 1s [id=sg-09440902461eb9b5d]
+data.aws_instance.app: Read complete after 2s [id=i-0ab69e8474108b35c]
+data.aws_route53_zone.internal: Read complete after 2s [id=Z06009461ORZ8Q53FG5UU]
+aws_route53_record.db: Refreshing state... [id=Z06009461ORZ8Q53FG5UU_db.timecapsule.internal_A]
+
+OpenTofu used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+OpenTofu will perform the following actions:
+
+  # aws_db_instance.app will be created
+  + resource "aws_db_instance" "app" {
+      + address                               = (known after apply)
+      + allocated_storage                     = 20
+      + apply_immediately                     = true
+      + arn                                   = (known after apply)
+      + auto_minor_version_upgrade            = true
+      + availability_zone                     = "eu-central-1a"
+      + backup_retention_period               = 1
+      + backup_target                         = (known after apply)
+      + backup_window                         = "01:00-01:30"
+      + ca_cert_identifier                    = (known after apply)
+      + character_set_name                    = (known after apply)
+      + copy_tags_to_snapshot                 = true
+      + database_insights_mode                = (known after apply)
+      + db_name                               = (known after apply)
+      + db_subnet_group_name                  = "timecapsule-dev-db-subnets"
+      + dedicated_log_volume                  = false
+      + delete_automated_backups              = true
+      + deletion_protection                   = true
+      + domain_fqdn                           = (known after apply)
+      + endpoint                              = (known after apply)
+      + engine                                = "postgres"
+      + engine_lifecycle_support              = (known after apply)
+      + engine_version                        = "16"
+      + engine_version_actual                 = (known after apply)
+      + hosted_zone_id                        = (known after apply)
+      + id                                    = (known after apply)
+      + identifier                            = "timecapsule-dev-rds"
+      + identifier_prefix                     = (known after apply)
+      + instance_class                        = "db.t4g.micro"
+      + iops                                  = (known after apply)
+      + kms_key_id                            = (known after apply)
+      + latest_restorable_time                = (known after apply)
+      + license_model                         = (known after apply)
+      + listener_endpoint                     = (known after apply)
+      + maintenance_window                    = "sun:03:00-sun:03:30"
+      + master_user_secret                    = (known after apply)
+      + master_user_secret_kms_key_id         = (known after apply)
+      + max_allocated_storage                 = 0
+      + monitoring_interval                   = 0
+      + monitoring_role_arn                   = (known after apply)
+      + multi_az                              = false
+      + multi_tenant                          = (known after apply)
+      + nchar_character_set_name              = (known after apply)
+      + network_type                          = (known after apply)
+      + option_group_name                     = (known after apply)
+      + parameter_group_name                  = (known after apply)
+      + password_wo                           = (write-only attribute)
+      + password_wo_version                   = 1
+      + performance_insights_enabled          = false
+      + performance_insights_kms_key_id       = (known after apply)
+      + performance_insights_retention_period = (known after apply)
+      + port                                  = 5432
+      + publicly_accessible                   = false
+      + region                                = "eu-central-1"
+      + replica_mode                          = (known after apply)
+      + replicas                              = (known after apply)
+      + resource_id                           = (known after apply)
+      + skip_final_snapshot                   = true
+      + snapshot_identifier                   = (known after apply)
+      + status                                = (known after apply)
+      + storage_encrypted                     = true
+      + storage_throughput                    = (known after apply)
+      + storage_type                          = "gp3"
+      + tags                                  = {
+          + "Lab"  = "lab5"
+          + "Name" = "timecapsule-dev-rds"
+        }
+      + tags_all                              = {
+          + "Lab"  = "lab5"
+          + "Name" = "timecapsule-dev-rds"
+        }
+      + timezone                              = (known after apply)
+      + upgrade_rollout_order                 = (known after apply)
+      + username                              = "dbadmin"
+      + vpc_security_group_ids                = (known after apply)
+
+      + timeouts {
+          + create = "60m"
+          + delete = "60m"
+          + update = "60m"
+        }
+    }
+
+  # aws_db_subnet_group.app will be created
+  + resource "aws_db_subnet_group" "app" {
+      + arn                     = (known after apply)
+      + description             = "Private subnets for the TimeCapsule application database"
+      + id                      = (known after apply)
+      + name                    = "timecapsule-dev-db-subnets"
+      + name_prefix             = (known after apply)
+      + region                  = "eu-central-1"
+      + subnet_ids              = [
+          + "subnet-03e7191c3a832cb62",
+          + "subnet-07f5ef7beff7f7001",
+        ]
+      + supported_network_types = (known after apply)
+      + tags                    = {
+          + "Lab"  = "lab5"
+          + "Name" = "timecapsule-dev-db-subnets"
+        }
+      + tags_all                = {
+          + "Lab"  = "lab5"
+          + "Name" = "timecapsule-dev-db-subnets"
+        }
+      + vpc_id                  = (known after apply)
+    }
+
+  # aws_iam_policy.rds_stop will be created
+  + resource "aws_iam_policy" "rds_stop" {
+      + arn              = (known after apply)
+      + attachment_count = (known after apply)
+      + description      = "Allow EventBridge Scheduler to stop only timecapsule-dev-rds"
+      + id               = (known after apply)
+      + name             = "timecapsule-dev-rds-stop"
+      + name_prefix      = (known after apply)
+      + path             = "/"
+      + policy           = (known after apply)
+      + policy_id        = (known after apply)
+      + tags             = {
+          + "Lab"  = "lab5"
+          + "Name" = "timecapsule-dev-rds-stop"
+        }
+      + tags_all         = {
+          + "Lab"  = "lab5"
+          + "Name" = "timecapsule-dev-rds-stop"
+        }
+    }
+
+  # aws_iam_role.scheduler will be created
+  + resource "aws_iam_role" "scheduler" {
+      + arn                   = (known after apply)
+      + assume_role_policy    = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = "sts:AssumeRole"
+                      + Condition = {
+                          + ArnEquals    = {
+                              + "aws:SourceArn" = "arn:aws:scheduler:eu-central-1:<account>:schedule-group/default"
+                            }
+                          + StringEquals = {
+                              + "aws:SourceAccount" = "<account>"
+                            }
+                        }
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + Service = "scheduler.amazonaws.com"
+                        }
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + create_date           = (known after apply)
+      + description           = "Role assumed by EventBridge Scheduler for the nightly RDS stop"
+      + force_detach_policies = false
+      + id                    = (known after apply)
+      + managed_policy_arns   = (known after apply)
+      + max_session_duration  = 3600
+      + name                  = "timecapsule-dev-scheduler-role"
+      + name_prefix           = (known after apply)
+      + path                  = "/"
+      + tags                  = {
+          + "Lab"  = "lab5"
+          + "Name" = "timecapsule-dev-scheduler-role"
+        }
+      + tags_all              = {
+          + "Lab"  = "lab5"
+          + "Name" = "timecapsule-dev-scheduler-role"
+        }
+      + unique_id             = (known after apply)
+
+      + inline_policy (known after apply)
+    }
+
+  # aws_iam_role_policy_attachment.rds_stop will be created
+  + resource "aws_iam_role_policy_attachment" "rds_stop" {
+      + id         = (known after apply)
+      + policy_arn = (known after apply)
+      + role       = "timecapsule-dev-scheduler-role"
+    }
+
+  # aws_scheduler_schedule.nightly_stop will be created
+  + resource "aws_scheduler_schedule" "nightly_stop" {
+      + action_after_completion      = (known after apply)
+      + arn                          = (known after apply)
+      + description                  = "Stops timecapsule-dev-rds every evening to limit RDS cost"
+      + group_name                   = "default"
+      + id                           = (known after apply)
+      + name                         = "timecapsule-dev-rds-nightly-stop"
+      + name_prefix                  = (known after apply)
+      + region                       = "eu-central-1"
+      + schedule_expression          = "cron(0 23 * * ? *)"
+      + schedule_expression_timezone = "Europe/Chisinau"
+      + state                        = "ENABLED"
+
+      + flexible_time_window {
+          + mode = "OFF"
+        }
+
+      + target {
+          + arn      = "arn:aws:scheduler:::aws-sdk:rds:stopDBInstance"
+          + input    = jsonencode(
+                {
+                  + DbInstanceIdentifier = "timecapsule-dev-rds"
+                }
+            )
+          + role_arn = (known after apply)
+
+          + retry_policy {
+              + maximum_event_age_in_seconds = 86400
+              + maximum_retry_attempts       = 0
+            }
+        }
+    }
+
+  # aws_security_group.rds will be created
+  + resource "aws_security_group" "rds" {
+      + arn                    = (known after apply)
+      + description            = "PostgreSQL only from the application security group"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "RDS does not initiate connections; keep the default egress for AWS health checks"
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = []
+              + description      = "PostgreSQL from app-server"
+              + from_port        = 5432
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = [
+                  + "sg-09440902461eb9b5d",
+                ]
+              + self             = false
+              + to_port          = 5432
+            },
+        ]
+      + name                   = "timecapsule-dev-rds-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + region                 = "eu-central-1"
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Lab"  = "lab5"
+          + "Name" = "timecapsule-dev-rds-sg"
+        }
+      + tags_all               = {
+          + "Lab"  = "lab5"
+          + "Name" = "timecapsule-dev-rds-sg"
+        }
+      + vpc_id                 = "vpc-0c2a85d598f3f550f"
+    }
+
+Plan: 7 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + db_address               = (known after apply)
+  + db_endpoint              = (known after apply)
+  + db_engine_version_actual = (known after apply)
+  + db_instance_arn          = (known after apply)
+  + db_instance_id           = "timecapsule-dev-rds"
+  + db_port                  = 5432
+  + db_subnet_group_name     = "timecapsule-dev-db-subnets"
+  + rds_security_group_id    = (known after apply)
+  + scheduler_role_arn       = (known after apply)
+  + stop_schedule_name       = "timecapsule-dev-rds-nightly-stop"
+
+─────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: <private-plan-dir>/provision.tfplan
+
+To perform exactly these actions, run the following command to apply:
+    tofu apply "<private-plan-dir>/provision.tfplan"

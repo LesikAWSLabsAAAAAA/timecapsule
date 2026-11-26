@@ -1,0 +1,9 @@
+CloudWatch GetMetricStatistics
+Namespace: AWS/RDS
+Metric: ReplicaLag
+DBInstanceIdentifier: lab5-db-replica
+Period: 60 seconds
+
+Timestamp (UTC)                  Average   Maximum   Unit
+2026-11-26T19:04:00+00:00            270       270   Seconds
+2026-11-26T19:05:00+00:00             30        30   Seconds

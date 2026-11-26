@@ -1,0 +1,12 @@
+
+DNS from app-server:
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+10.18.10.85     STREAM lab5-db.cpwgmyac0gll.eu-central-1.rds.amazonaws.com
+
+DNS from local machine:
+10.18.10.85     STREAM lab5-db.cpwgmyac0gll.eu-central-1.rds.amazonaws.com
+
+TCP 5432 from bastion (without lab5-web-sg):
+Exit status: 124 (124 = timeout)

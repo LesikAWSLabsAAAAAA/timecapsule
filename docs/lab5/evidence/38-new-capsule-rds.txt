@@ -1,0 +1,9 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+HTTP POST /capsules redirected to /capsules/3
+
+{"id":3,"title":"Lab5 RDS smoke 7e7f1fef4060","server_ip":"10.18.10.73","tls":"true"}

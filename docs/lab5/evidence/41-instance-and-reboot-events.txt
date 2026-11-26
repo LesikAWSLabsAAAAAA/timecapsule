@@ -1,0 +1,11 @@
+AWS API verification — eu-central-1
+
+EC2 instance           State
+timecapsule-dev-app    running
+timecapsule-dev-db     stopped
+
+RDS instance: timecapsule-dev-rds
+Status after reboot: available
+Endpoint: timecapsule-dev-rds.cpwgmyac0gll.eu-central-1.rds.amazonaws.com:5432
+2026-11-26T20:07:08.982Z  DB instance shutdown
+2026-11-26T20:07:24.030Z  DB instance restarted

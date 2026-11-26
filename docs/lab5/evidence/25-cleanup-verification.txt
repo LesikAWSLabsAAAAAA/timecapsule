@@ -1,0 +1,9 @@
+AWS API verification — eu-central-1
+
+RDS DB instances with prefix lab5-: []
+RDS DB subnet groups with prefix lab5-: []
+EC2 security groups with prefix lab5-: []
+
+Instance              State     Security groups
+timecapsule-dev-web   stopped   web-sg
+timecapsule-dev-app   running   web-sg

@@ -1,0 +1,6 @@
+RDS DescribeDBInstances — eu-central-1
+DBInstanceIdentifier: lab5-db
+DBInstanceStatus: available
+LatestRestorableTime: 2026-11-26T19:19:03+00:00
+ReadReplicaDBInstanceIdentifiers: []
+Requested restore time: 2026-11-26T19:07:05Z

@@ -1,0 +1,19 @@
+RDS DescribeDBInstances — eu-central-1
+DBInstanceIdentifier: timecapsule-dev-rds
+DBInstanceStatus: available
+EngineVersion: 16.13
+DBInstanceClass: db.t4g.micro
+AvailabilityZone: eu-central-1a
+PubliclyAccessible: false
+StorageEncrypted: true
+BackupRetentionPeriod: 1
+DBSubnetGroup: timecapsule-dev-db-subnets (eu-central-1a, eu-central-1b)
+
+Scheduler GetSchedule — eu-central-1
+Name: timecapsule-dev-rds-nightly-stop
+State: ENABLED
+ScheduleExpression: cron(0 23 * * ? *)
+ScheduleExpressionTimezone: Europe/Chisinau
+FlexibleTimeWindow: OFF
+Target: arn:aws:scheduler:::aws-sdk:rds:stopDBInstance
+Input: {"DbInstanceIdentifier":"timecapsule-dev-rds"}

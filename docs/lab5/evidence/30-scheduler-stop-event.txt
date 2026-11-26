@@ -1,0 +1,12 @@
+EventBridge Scheduler test — eu-central-1
+Schedule: timecapsule-dev-rds-nightly-stop
+Test run: 2026-11-26 21:52 Europe/Chisinau
+
+CloudTrail event: StopDBInstance
+Event UTC: 2026-11-26T19:52:37Z
+Execution role: timecapsule-dev-scheduler-role
+DB instance: timecapsule-dev-rds
+
+RDS event: DB instance stopped
+Event UTC: 2026-11-26T19:56:56.691Z
+DescribeDBInstances status: stopped

@@ -1,0 +1,16 @@
+aws_db_subnet_group.lab5: Creating...
+aws_security_group.web: Creating...
+aws_db_subnet_group.lab5: Creation complete after 1s [id=lab5-db-subnets]
+aws_security_group.web: Creation complete after 3s [id=sg-024a972acbc650da7]
+aws_network_interface_sg_attachment.web: Creating...
+aws_security_group.rds: Creating...
+aws_network_interface_sg_attachment.web: Creation complete after 1s [id=sg-024a972acbc650da7_eni-082e64514681ae2e2]
+aws_security_group.rds: Creation complete after 3s [id=sg-0c5ce3e13ca7191bf]
+aws_db_instance.sandbox: Creating...
+
+Error: creating RDS DB Instance (lab5-db): operation error RDS: CreateDBInstance, https response error StatusCode: 400, RequestID: 20b0fdae-bcc7-49e5-8619-aa46bc39adc4, api error FreeTierRestrictionError: The specified backup retention period exceeds the maximum available to free tier customers. To remove all limitations, upgrade your account plan.
+
+  with aws_db_instance.sandbox,
+  on main.tf line 80, in resource "aws_db_instance" "sandbox":
+  80: resource "aws_db_instance" "sandbox" {
+

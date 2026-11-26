@@ -1,0 +1,17 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+SELECT pg_sleep(8);
+ pg_sleep 
+----------
+ 
+(1 row)
+
+SELECT * FROM notes;
+ id | body | created_at 
+----+------+------------
+(0 rows)
+

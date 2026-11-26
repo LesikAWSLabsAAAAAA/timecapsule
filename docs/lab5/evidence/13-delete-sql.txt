@@ -1,0 +1,25 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+SELECT to_char(clock_timestamp() AT TIME ZONE 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS"Z"') AS restore_time_utc;
+   restore_time_utc   
+----------------------
+ 2026-11-26T19:07:05Z
+(1 row)
+
+SELECT pg_sleep(61);
+ pg_sleep 
+----------
+ 
+(1 row)
+
+DELETE FROM notes;
+DELETE 4
+SELECT * FROM notes;
+ id | body | created_at 
+----+------+------------
+(0 rows)
+

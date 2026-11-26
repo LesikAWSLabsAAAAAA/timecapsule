@@ -1,0 +1,21 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+timecapsule|timecapsule|PostgreSQL 16.15 on x86_64-amazon-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5), 64-bit
+postgres|dbadmin|PostgreSQL 16.13 on aarch64-unknown-linux-gnu, compiled by aarch64-unknown-linux-gnu-gcc (GCC) 12.4.0, 64-bit
+CREATE ROLE
+Enter new password for user "timecapsule": 
+Enter it again: 
+GRANT ROLE
+CREATE DATABASE
+You are connected to database "timecapsule" as user "timecapsule" on host "timecapsule-dev-rds.cpwgmyac0gll.eu-central-1.rds.amazonaws.com" (address "10.18.10.73") at port "5432".
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
+Nginx stopped: no requests can write to the source during the dump.
+table          source   RDS      matching contents
+users          2        2        yes
+capsules       2        2        yes
+notifications  4        4        yes
+Verified. The private dump will be removed; Nginx stays stopped until DNS verification.

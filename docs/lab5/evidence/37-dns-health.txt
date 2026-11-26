@@ -1,0 +1,13 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+db.timecapsule.internal. 300	IN	CNAME	timecapsule-dev-rds.cpwgmyac0gll.eu-central-1.rds.amazonaws.com.
+timecapsule-dev-rds.cpwgmyac0gll.eu-central-1.rds.amazonaws.com. 5 IN A	10.18.10.73
+
+PHP PDO connected to the verified RDS address over TLS.
+
+{"status":"ok","db":"ok","hostname":"ip-10-18-0-165.eu-central-1.compute.internal"}
+HTTP 200

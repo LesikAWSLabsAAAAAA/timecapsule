@@ -1,0 +1,13 @@
+AWS API verification — eu-central-1
+Checked at: 2026-11-26T20:27:26Z
+
+RDS DescribeDBInstances
+DBInstanceIdentifier: timecapsule-dev-rds
+DBInstanceStatus: stopped
+Endpoint: timecapsule-dev-rds.cpwgmyac0gll.eu-central-1.rds.amazonaws.com:5432
+
+Scheduler GetSchedule
+Name: timecapsule-dev-rds-nightly-stop
+State: ENABLED
+ScheduleExpression: cron(0 23 * * ? *)
+ScheduleExpressionTimezone: Europe/Chisinau

@@ -1,0 +1,29 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+\conninfo
+You are connected to database "lab5" as user "dbadmin" on host "lab5-db-restore.cpwgmyac0gll.eu-central-1.rds.amazonaws.com" (address "10.18.10.190") at port "5432".
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
+SELECT * FROM notes ORDER BY id;
+ id |  body  |          created_at           
+----+--------+-------------------------------
+  1 | first  | 2026-11-26 18:56:42.46829+00
+  2 | second | 2026-11-26 18:56:42.46829+00
+  3 | third  | 2026-11-26 18:56:42.46829+00
+  4 | fourth | 2026-11-26 19:06:26.966363+00
+(4 rows)
+
+SELECT array_agg(body::text ORDER BY id) = ARRAY['first', 'second', 'third', 'fourth'] AS restored_all_rows FROM notes;
+ restored_all_rows 
+-------------------
+ t
+(1 row)
+
+\gset
+\if :restored_all_rows
+\echo Verified: all four original rows were recovered.
+Verified: all four original rows were recovered.
+\endif

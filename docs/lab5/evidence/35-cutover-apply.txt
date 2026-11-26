@@ -1,0 +1,19 @@
+aws_route53_record.db: Modifying... [id=Z06009461ORZ8Q53FG5UU_db.timecapsule.internal_A]
+aws_route53_record.db: Still modifying... [id=Z06009461ORZ8Q53FG5UU_db.timecapsule.internal_A, 10s elapsed]
+aws_route53_record.db: Modifications complete after 18s [id=Z06009461ORZ8Q53FG5UU_db.timecapsule.internal_CNAME]
+
+Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+
+Outputs:
+
+database_dns_name = "db.timecapsule.internal"
+db_address = "timecapsule-dev-rds.cpwgmyac0gll.eu-central-1.rds.amazonaws.com"
+db_endpoint = "timecapsule-dev-rds.cpwgmyac0gll.eu-central-1.rds.amazonaws.com:5432"
+db_engine_version_actual = "16.13"
+db_instance_arn = "arn:aws:rds:eu-central-1:<account>:db:timecapsule-dev-rds"
+db_instance_id = "timecapsule-dev-rds"
+db_port = 5432
+db_subnet_group_name = "timecapsule-dev-db-subnets"
+rds_security_group_id = "sg-0e3274ffa139d6ce9"
+scheduler_role_arn = "arn:aws:iam::<account>:role/timecapsule-dev-scheduler-role"
+stop_schedule_name = "timecapsule-dev-rds-nightly-stop"

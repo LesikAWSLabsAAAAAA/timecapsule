@@ -1,0 +1,39 @@
+data.aws_vpc.main: Reading...
+data.aws_instance.client: Reading...
+data.aws_vpc.main: Read complete after 1s [id=vpc-0c2a85d598f3f550f]
+data.aws_subnet.private_b: Reading...
+data.aws_subnet.private_a: Reading...
+aws_security_group.web: Refreshing state... [id=sg-024a972acbc650da7]
+data.aws_subnet.private_a: Read complete after 1s [id=subnet-07f5ef7beff7f7001]
+data.aws_subnet.private_b: Read complete after 1s [id=subnet-03e7191c3a832cb62]
+aws_db_subnet_group.lab5: Refreshing state... [id=lab5-db-subnets]
+aws_security_group.rds: Refreshing state... [id=sg-0c5ce3e13ca7191bf]
+data.aws_instance.client: Read complete after 2s [id=i-0ab69e8474108b35c]
+aws_db_instance.sandbox: Refreshing state... [id=db-RDXCMZE3OOQF6CJAY5RDYJG644]
+aws_network_interface_sg_attachment.web: Refreshing state... [id=sg-024a972acbc650da7_eni-082e64514681ae2e2]
+
+OpenTofu used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+-/+ destroy and then create replacement
+
+OpenTofu will perform the following actions:
+
+  # aws_network_interface_sg_attachment.web must be replaced
+-/+ resource "aws_network_interface_sg_attachment" "web" {
+      ~ id                   = "sg-024a972acbc650da7_eni-082e64514681ae2e2" -> (known after apply)
+      ~ network_interface_id = "eni-082e64514681ae2e2" -> "eni-0a2c367e79b3c2259" # forces replacement
+        # (2 unchanged attributes hidden)
+    }
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+Changes to Outputs:
+  + client_instance_id            = "i-0ab69e8474108b35c"
+  - web_server_instance_id        = "i-0a75775b81fa8004c" -> null
+
+─────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: <private-plan-dir>/client.tfplan
+
+To perform exactly these actions, run the following command to apply:
+    tofu apply "<private-plan-dir>/client.tfplan"

@@ -1,0 +1,13 @@
+OpenTofu plan — excerpt
+
+# aws_db_instance.sandbox will be created
+      + allocated_storage                     = 20
+      + availability_zone                     = "eu-central-1a"
+      + backup_retention_period               = 1
+      + deletion_protection                   = true
+      + engine_version                        = "16"
+      + identifier                            = "lab5-db"
+      + instance_class                        = "db.t4g.micro"
+      + publicly_accessible                   = false
+      + storage_encrypted                     = true
+      + storage_type                          = "gp3"

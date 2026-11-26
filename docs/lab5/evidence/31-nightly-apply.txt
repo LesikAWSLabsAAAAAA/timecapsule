@@ -1,0 +1,18 @@
+aws_scheduler_schedule.nightly_stop: Modifying... [id=default/timecapsule-dev-rds-nightly-stop]
+aws_scheduler_schedule.nightly_stop: Modifications complete after 0s [id=default/timecapsule-dev-rds-nightly-stop]
+
+Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+
+Outputs:
+
+database_dns_name = "db.timecapsule.internal"
+db_address = "timecapsule-dev-rds.cpwgmyac0gll.eu-central-1.rds.amazonaws.com"
+db_endpoint = "timecapsule-dev-rds.cpwgmyac0gll.eu-central-1.rds.amazonaws.com:5432"
+db_engine_version_actual = "16.13"
+db_instance_arn = "arn:aws:rds:eu-central-1:<account>:db:timecapsule-dev-rds"
+db_instance_id = "timecapsule-dev-rds"
+db_port = 5432
+db_subnet_group_name = "timecapsule-dev-db-subnets"
+rds_security_group_id = "sg-0e3274ffa139d6ce9"
+scheduler_role_arn = "arn:aws:iam::<account>:role/timecapsule-dev-scheduler-role"
+stop_schedule_name = "timecapsule-dev-rds-nightly-stop"

@@ -1,0 +1,234 @@
+data.aws_vpc.main: Reading...
+data.aws_instance.web: Reading...
+data.aws_vpc.main: Read complete after 1s [id=vpc-0c2a85d598f3f550f]
+data.aws_subnet.private_a: Reading...
+data.aws_subnet.private_b: Reading...
+data.aws_subnet.private_a: Read complete after 0s [id=subnet-07f5ef7beff7f7001]
+data.aws_subnet.private_b: Read complete after 0s [id=subnet-03e7191c3a832cb62]
+data.aws_instance.web: Read complete after 2s [id=i-0a75775b81fa8004c]
+
+OpenTofu used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+OpenTofu will perform the following actions:
+
+  # aws_db_instance.sandbox will be created
+  + resource "aws_db_instance" "sandbox" {
+      + address                               = (known after apply)
+      + allocated_storage                     = 20
+      + apply_immediately                     = true
+      + arn                                   = (known after apply)
+      + auto_minor_version_upgrade            = true
+      + availability_zone                     = "eu-central-1a"
+      + backup_retention_period               = 7
+      + backup_target                         = (known after apply)
+      + backup_window                         = "01:00-01:30"
+      + ca_cert_identifier                    = (known after apply)
+      + character_set_name                    = (known after apply)
+      + copy_tags_to_snapshot                 = true
+      + database_insights_mode                = (known after apply)
+      + db_name                               = "lab5"
+      + db_subnet_group_name                  = "lab5-db-subnets"
+      + dedicated_log_volume                  = false
+      + delete_automated_backups              = true
+      + deletion_protection                   = true
+      + domain_fqdn                           = (known after apply)
+      + endpoint                              = (known after apply)
+      + engine                                = "postgres"
+      + engine_lifecycle_support              = (known after apply)
+      + engine_version                        = "16"
+      + engine_version_actual                 = (known after apply)
+      + hosted_zone_id                        = (known after apply)
+      + id                                    = (known after apply)
+      + identifier                            = "lab5-db"
+      + identifier_prefix                     = (known after apply)
+      + instance_class                        = "db.t4g.micro"
+      + iops                                  = (known after apply)
+      + kms_key_id                            = (known after apply)
+      + latest_restorable_time                = (known after apply)
+      + license_model                         = (known after apply)
+      + listener_endpoint                     = (known after apply)
+      + maintenance_window                    = "sun:03:00-sun:03:30"
+      + master_user_secret                    = (known after apply)
+      + master_user_secret_kms_key_id         = (known after apply)
+      + max_allocated_storage                 = 0
+      + monitoring_interval                   = 0
+      + monitoring_role_arn                   = (known after apply)
+      + multi_az                              = false
+      + multi_tenant                          = (known after apply)
+      + nchar_character_set_name              = (known after apply)
+      + network_type                          = (known after apply)
+      + option_group_name                     = (known after apply)
+      + parameter_group_name                  = (known after apply)
+      + password_wo                           = (write-only attribute)
+      + password_wo_version                   = 1
+      + performance_insights_enabled          = false
+      + performance_insights_kms_key_id       = (known after apply)
+      + performance_insights_retention_period = (known after apply)
+      + port                                  = 5432
+      + publicly_accessible                   = false
+      + region                                = "eu-central-1"
+      + replica_mode                          = (known after apply)
+      + replicas                              = (known after apply)
+      + resource_id                           = (known after apply)
+      + skip_final_snapshot                   = true
+      + snapshot_identifier                   = (known after apply)
+      + status                                = (known after apply)
+      + storage_encrypted                     = true
+      + storage_throughput                    = (known after apply)
+      + storage_type                          = "gp3"
+      + tags                                  = {
+          + "Lab"  = "lab5"
+          + "Name" = "lab5-db"
+        }
+      + tags_all                              = {
+          + "Lab"  = "lab5"
+          + "Name" = "lab5-db"
+        }
+      + timezone                              = (known after apply)
+      + upgrade_rollout_order                 = (known after apply)
+      + username                              = "dbadmin"
+      + vpc_security_group_ids                = (known after apply)
+
+      + timeouts {
+          + create = "60m"
+          + delete = "60m"
+          + update = "60m"
+        }
+    }
+
+  # aws_db_subnet_group.lab5 will be created
+  + resource "aws_db_subnet_group" "lab5" {
+      + arn                     = (known after apply)
+      + description             = "Lab 5 sandbox private subnets"
+      + id                      = (known after apply)
+      + name                    = "lab5-db-subnets"
+      + name_prefix             = (known after apply)
+      + region                  = "eu-central-1"
+      + subnet_ids              = [
+          + "subnet-03e7191c3a832cb62",
+          + "subnet-07f5ef7beff7f7001",
+        ]
+      + supported_network_types = (known after apply)
+      + tags                    = {
+          + "Lab"  = "lab5"
+          + "Name" = "lab5-db-subnets"
+        }
+      + tags_all                = {
+          + "Lab"  = "lab5"
+          + "Name" = "lab5-db-subnets"
+        }
+      + vpc_id                  = (known after apply)
+    }
+
+  # aws_network_interface_sg_attachment.web will be created
+  + resource "aws_network_interface_sg_attachment" "web" {
+      + id                   = (known after apply)
+      + network_interface_id = "eni-082e64514681ae2e2"
+      + region               = "eu-central-1"
+      + security_group_id    = (known after apply)
+    }
+
+  # aws_security_group.rds will be created
+  + resource "aws_security_group" "rds" {
+      + arn                    = (known after apply)
+      + description            = "Lab 5 sandbox: PostgreSQL only from lab5-web-sg"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "Default egress; RDS does not initiate connections"
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = []
+              + description      = "PostgreSQL from the lab 5 web-server"
+              + from_port        = 5432
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = (known after apply)
+              + self             = false
+              + to_port          = 5432
+            },
+        ]
+      + name                   = "lab5-rds-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + region                 = "eu-central-1"
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Lab"  = "lab5"
+          + "Name" = "lab5-rds-sg"
+        }
+      + tags_all               = {
+          + "Lab"  = "lab5"
+          + "Name" = "lab5-rds-sg"
+        }
+      + vpc_id                 = "vpc-0c2a85d598f3f550f"
+    }
+
+  # aws_security_group.web will be created
+  + resource "aws_security_group" "web" {
+      + arn                    = (known after apply)
+      + description            = "Lab 5 sandbox: source security group for the database clients"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "Allow the web-server to reach RDS and package mirrors"
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = (known after apply)
+      + name                   = "lab5-web-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + region                 = "eu-central-1"
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Lab"  = "lab5"
+          + "Name" = "lab5-web-sg"
+        }
+      + tags_all               = {
+          + "Lab"  = "lab5"
+          + "Name" = "lab5-web-sg"
+        }
+      + vpc_id                 = "vpc-0c2a85d598f3f550f"
+    }
+
+Plan: 5 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + replica_endpoint              = ""
+  + restore_endpoint              = ""
+  + sandbox_address               = (known after apply)
+  + sandbox_endpoint              = (known after apply)
+  + sandbox_engine_version_actual = (known after apply)
+  + web_server_instance_id        = "i-0a75775b81fa8004c"
+
+─────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: <private-plan-dir>/part1.tfplan
+
+To perform exactly these actions, run the following command to apply:
+    tofu apply "<private-plan-dir>/part1.tfplan"
