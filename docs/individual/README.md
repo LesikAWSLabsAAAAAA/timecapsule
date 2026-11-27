@@ -51,8 +51,8 @@ ARN секрета, регион и параметры подключения к
 окружения: `DB_SECRET_ARN`, `AWS_REGION`, `DB_HOST`, `DB_PORT`, `DB_NAME`,
 `DB_USER`.
 
-**Pull request:** будет создан позже.
-<!-- PR_LINK -->
+**Pull request:** [#1](https://github.com/LesikAWSLabsAAAAAA/timecapsule/pull/1)
+(ветка `individual/secrets-manager`, base `master`).
 
 **Политика IAM:** [iam-policy.json](iam-policy.json) (номер аккаунта заменён
 на `<account>`); [исходник OpenTofu](tofu/secrets/main.tf).
