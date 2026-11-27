@@ -1,0 +1,11 @@
+The web application could not read Secrets Manager, but the opener Lambda still used its
+own (rotated) database password and opened a due capsule.
+
+Lambda invocation payload:
+{"eventType": "capsules.opened", "openedCount": 1}
+
+Database rows after the invocation:
+11|B4 background job|t
+11|individual-secrets-1795739589@example.com|Your capsule "B4 background job" is now open.
+
+The web application returned HTTP 500 for /health and /wall at the same time.

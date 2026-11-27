@@ -26,6 +26,7 @@ date_default_timezone_set('UTC');
 
 // 3. Our own code: plain files full of functions, loaded in this order.
 require __DIR__ . '/helpers.php';
+require __DIR__ . '/secrets.php';
 require __DIR__ . '/db.php';
 require __DIR__ . '/csrf.php';
 require __DIR__ . '/auth.php';

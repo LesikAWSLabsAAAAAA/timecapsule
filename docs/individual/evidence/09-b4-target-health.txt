@@ -1,0 +1,14 @@
+After replacing the policy Allow with an explicit Deny and clearing the secret cache:
+
+$ curl http://timecapsule-dev-individual-alb-512631178.eu-central-1.elb.amazonaws.com/health
+HTTP 500
+{"status":"error","db":"error","credentials":"error",
+ "hint":"Cannot load database credentials from Secrets Manager. Check DB_SECRET_ARN and the timecapsule-dev-app-secretsmanager policy."}
+
+Target group timecapsule-dev-individual-tg:
+i-0a4913aa356942872  unhealthy  Target.ResponseCodeMismatch
+i-0ebd38b48c713c796  unhealthy  Target.ResponseCodeMismatch
+
+The application error page (screenshot 04) rendered without a database;
+/css/app.css still returned HTTP 200. The opener Lambda returned
+{"eventType":"capsules.opened","openedCount":1} at the same time.

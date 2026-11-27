@@ -9,11 +9,22 @@ function health_check(): void
         // Reading a real table also catches a database that has no tables yet.
         db()->query('SELECT COUNT(*) FROM users');
         $status = 200;
-        $body = ['status' => 'ok', 'db' => 'ok'];
+        $body = [
+            'status' => 'ok',
+            'db' => 'ok',
+            'credentials' => db_secret_arn() !== null ? 'secretsmanager' : 'env',
+        ];
     } catch (Throwable $e) {
         error_log('Health check failed: ' . $e->getMessage());
         $status = 500;
-        $body = ['status' => 'error', 'db' => 'error', 'hint' => db_problem_hint($e)];
+        $body = [
+            'status' => 'error',
+            'db' => 'error',
+            'credentials' => db_secret_arn() === null
+                ? 'env'
+                : (db_error_is_secret($e) ? 'error' : 'secretsmanager'),
+            'hint' => db_problem_hint($e),
+        ];
     }
 
     http_response_code($status);

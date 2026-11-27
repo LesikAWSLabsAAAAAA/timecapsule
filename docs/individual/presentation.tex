@@ -1,0 +1,220 @@
+% Сборка из docs/individual: xelatex presentation.tex (дважды).
+% Заметки \note в исходнике рассчитаны примерно на две минуты.
+\documentclass[aspectratio=169,10pt]{beamer}
+\usetheme{Madrid}
+\usepackage{fontspec}
+\setsansfont{Liberation Sans}
+\setmonofont{Liberation Mono}
+\usepackage{booktabs,graphicx,tikz}
+\usetikzlibrary{arrows.meta,positioning}
+
+\definecolor{pine}{HTML}{145541}
+\definecolor{ink}{HTML}{182720}
+\definecolor{muted}{HTML}{4C5E55}
+\definecolor{sun}{HTML}{F4CD50}
+\definecolor{line}{HTML}{DCE5DF}
+\setbeamercolor{normal text}{fg=ink,bg=white}
+\setbeamercolor{structure}{fg=pine}
+\setbeamercolor{frametitle}{fg=pine,bg=white}
+\setbeamerfont{frametitle}{size=\LARGE,series=\bfseries}
+\setbeamersize{text margin left=9mm,text margin right=9mm}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{bibliography item}[text]
+\renewcommand{\appendixname}{Приложение}
+\setbeamertemplate{footline}{%
+  \hbox to \paperwidth{\hspace{9mm}\textcolor{muted}{\scriptsize TimeCapsule / AWS Secrets Manager}\hfil
+  \textcolor{pine}{\scriptsize\insertframenumber}\hspace{9mm}}\vskip4mm}
+\setbeamertemplate{frametitle}{%
+  \vskip4mm\noindent\textcolor{sun}{\rule{8mm}{1.1mm}}\par
+  \vskip1mm\noindent\strut\insertframetitle\par}
+\setbeameroption{hide notes}
+\hypersetup{pdftitle={AWS Secrets Manager в TimeCapsule},pdfauthor={Пустовой Алексей}}
+\newcommand{\chip}[1]{\begingroup\setlength{\fboxsep}{4pt}\colorbox{sun}{\strut\textbf{#1}}\endgroup}
+\newcommand{\tagline}[1]{{\small\bfseries\color{pine}#1}\par}
+\newcommand{\slidelink}[2]{\hyperlink{#1}{\textcolor{pine}{\underline{#2}}}}
+\newcommand{\figurecrop}[2]{%
+  \begingroup\setlength{\fboxsep}{0pt}\setlength{\fboxrule}{.4pt}%
+  \fcolorbox{line}{white}{\includegraphics[width=\dimexpr\linewidth-2\fboxrule\relax,trim=#1,clip]{evidence/#2}}\endgroup}
+
+\begin{document}
+
+\begin{frame}[label=intro]
+  \chip{Индивидуальная работа · Вариант B}
+  \par\bigskip
+  {\fontsize{28}{31}\selectfont\bfseries\color{pine} AWS Secrets Manager\\
+    в TimeCapsule\par}
+  \medskip
+  {\large Как убрать пароль PostgreSQL из образа EC2?\par}
+  \bigskip
+  \texttt{.env} \(\longrightarrow\) \textbf{AMI с действующим паролем}
+  \quad\textcolor{muted}{·}\quad Старый пароль: \textbf{3 символа}
+  \par\bigskip
+  {\small Пустовой Алексей · IA2404 · Прикладная информатика}
+  \note{0:00–0:18. Раньше пароль PostgreSQL лежал в файле .env. При создании образа EC2 файл копировался вместе с диском. Значит, одного старого образа хватало, чтобы получить ещё действующий пароль. Я хотел убрать пароль из выпуска веб-приложения.}
+\end{frame}
+
+\begin{frame}[label=integration]{Как приложение получает пароль}
+  AWS Secrets Manager хранит секрет в зашифрованном виде и позволяет
+  ограничить и аудировать его чтение.
+  \par\medskip
+  \begin{center}
+  \begin{tikzpicture}[
+    svc/.style={draw=line,rounded corners=2pt,align=center,
+      minimum height=9mm,inner xsep=7pt},
+    flow/.style={-{Stealth[length=2mm]},draw=muted,thick},
+    fetch/.style={-{Stealth[length=2mm]},draw=pine,thick,dashed}]
+    \node[svc] (app) {\textbf{PHP на EC2}\\\small роль IAM};
+    \node[svc,left=8mm of app] (alb) {ALB};
+    \node[svc,left=8mm of alb] (browser) {Браузер};
+    \node[svc,right=16mm of app] (db) {RDS PostgreSQL};
+    \node[svc,draw=pine,fill=sun!30,below=12mm of app] (secret)
+      {\textbf{Secrets Manager}};
+    \draw[flow] (browser) -- (alb);
+    \draw[flow] (alb) -- (app);
+    \draw[flow] (app) -- (db);
+    \draw[fetch] (app) -- node[right,font=\small] {\texttt{GetSecretValue}} (secret);
+  \end{tikzpicture}
+  \end{center}
+  \textbf{Роль EC2:} чтение одного секрета, без статических ключей AWS.\\
+  \textbf{Кэш:} 5 минут; вызов к AWS только при промахе.
+  \note{0:18–0:50. В .env остался идентификатор секрета, а не пароль. PHP обращается к Secrets Manager от роли EC2. Политика разрешает только GetSecretValue для одного секрета. Веб-приложение держит пароль в кэше пять минут, затем при необходимости читает его снова. Версию выпустил через новый AMI и Auto Scaling.}
+\end{frame}
+
+\begin{frame}[label=result]{Новый образ не содержит пароль БД}
+  \begin{columns}[T,onlytextwidth]
+    \column{.46\textwidth}
+    \tagline{ДО → ПОСЛЕ}
+    \begin{center}
+      \begin{tabular}{@{}lr@{}}
+        \toprule
+        Длина пароля & \(\mathbf{3 \to 43}\)\\
+        \texttt{DB\_PASSWORD} в \texttt{.env} & был $\to$ нет\\
+        \bottomrule
+      \end{tabular}
+    \end{center}
+    \medskip
+    \textbf{Старый пароль отвергнут PostgreSQL.}
+    \column{.50\textwidth}
+    % Оставлена только тестовая капсула; подвал и автор не попадают в кадр.
+    \figurecrop{205 440 891 155}{01-app-wall-secretsmanager.png}
+    \par\smallskip{\small Тестовая капсула на публичной стене}
+  \end{columns}
+  \note{0:50–1:12. Я сменил пароль с трёх на 43 случайных символа. В .env нового образа строки DB_PASSWORD нет, а PostgreSQL отвергает старый пароль. После выпуска я создал тестовую капсулу, и она появилась на публичной стене.}
+\end{frame}
+
+\begin{frame}[label=failure]{Что происходит при отказе доступа}
+  \begin{columns}[T,onlytextwidth]
+    \column{.50\textwidth}
+    \figurecrop{392 504 392 150}{04-app-failure-500.png}
+    \par\smallskip{\small Страница ошибки после запрета чтения секрета}
+    \column{.45\textwidth}
+    \tagline{ЯВНЫЙ DENY + ОЧИСТКА КЭША}
+    \medskip
+    \textbf{HTTP 500} · стена и \texttt{/health}
+    \par\smallskip
+    \textbf{Работают} · статика и Lambda opener
+    \par\smallskip
+    \textbf{Восстановление} · возврат \texttt{Allow},
+    замена инстансов, \texttt{/health} снова 200
+  \end{columns}
+  \note{1:12–1:40. Чтобы проверить отказ, я запретил чтение секрета и очистил кэш. Без пароля стена вернула 500, но статика продолжила отдаваться, а фоновая Lambda открыла капсулу. После возврата прав и замены инстансов проверка здоровья снова вернула 200.}
+\end{frame}
+
+\begin{frame}[label=decision]{Стоило ли внедрять Secrets Manager?}
+  \begin{columns}[T,onlytextwidth]
+    \column{.46\textwidth}
+    \chip{Оценка дополнительных расходов}
+    \par\medskip
+    {\fontsize{28}{30}\selectfont\bfseries\color{pine}\$0{,}49\par}
+    \smallskip
+    в месяц при 10\,000 активных пользователей
+    \par\smallskip{\small Модель с кэшем; без стоимости стенда.}
+    \column{.49\textwidth}
+    \tagline{ЧТО ПОЛУЧИЛИ}
+    Пароль не в AMI; обращения к секрету можно аудировать.
+    \par\medskip
+    \tagline{ЧЕМ ЗАПЛАТИЛИ}
+    Без кэша отказ чтения блокирует веб-функции, которым нужна БД.
+  \end{columns}
+  \par\bigskip
+  {\small\textbf{Альтернатива:} RDS IAM auth убирает статический пароль, но меняет подключение к БД.}
+  \note{1:40–2:00. Для десяти тысяч пользователей модель даёт около 49 центов в месяц сверх стоимости стенда. Я выбрал Secrets Manager, потому что он убирает пароль из AMI без перехода на другой способ аутентификации PostgreSQL. Компромисс: при пустом кэше отказ чтения секрета блокирует работу с БД.}
+\end{frame}
+
+\begin{frame}{Источники}
+  \small
+  \begin{thebibliography}{9}
+    \bibitem{report} \href{https://github.com/LesikAWSLabsAAAAAA/timecapsule}{TimeCapsule}:
+      \texttt{docs/individual/README.md} и материалы проверки.
+    \bibitem{adr} TimeCapsule. ADR-0008: сравнение вариантов и условия пересмотра.
+    \bibitem{secret} AWS. \href{https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html}{AWS Secrets Manager: руководство пользователя}.
+    \bibitem{pricing} AWS. \href{https://aws.amazon.com/secretsmanager/pricing/}{Тарифы AWS Secrets Manager}.
+    \bibitem{rds} AWS. \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html}{IAM database authentication for Amazon RDS}.
+  \end{thebibliography}
+\end{frame}
+
+\begin{frame}[label=thanks]
+  \noindent{\fontsize{34}{37}\selectfont\bfseries\color{pine} Спасибо!\par}
+  \bigskip
+  {\large Пароль читается при работе приложения,\\
+  а не поставляется вместе с образом.}
+  \par\bigskip
+  \slidelink{extras}{Материалы для вопросов}
+\end{frame}
+
+\appendix
+\begin{frame}[label=extras]{Материалы для вопросов}
+  \slidelink{console}{Секрет в консоли}\quad
+  \slidelink{measurements}{Замеры}\quad
+  \slidelink{pricingmodel}{Расчёт цены}
+\end{frame}
+
+\begin{frame}[label=console]{Секрет в консоли AWS}
+  \begin{columns}[T,onlytextwidth]
+    \column{.55\textwidth}
+    \figurecrop{15 1063 909 96}{03-secretsmanager-console.png}
+    \column{.40\textwidth}
+    \tagline{TIMECAPSULE-DEV-DB}
+    Регион \texttt{eu-central-1}
+    \par\medskip
+    На скриншоте видны метаданные, а не значение секрета.
+  \end{columns}
+  \bigskip\slidelink{integration}{К схеме внедрения}
+\end{frame}
+
+\begin{frame}[label=measurements]{Замеры чтения секрета}
+  \begin{center}
+    \begin{tabular}{@{}lr@{}}
+      \toprule
+      Режим & Время\\
+      \midrule
+      Чтение из Secrets Manager & 138--346 мс\\
+      Чтение из кэша & 0--1 мс\\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  \medskip
+  Это время чтения секрета, а не полное время ответа страницы.
+  \par\bigskip\slidelink{result}{К результату}
+\end{frame}
+
+\begin{frame}[label=pricingmodel]{Из чего получились \$0{,}49 в месяц}
+  \begin{center}
+    \begin{tabular}{@{}lr@{}}
+      \toprule
+      Допущение или расход & Значение\\
+      \midrule
+      10\,000 пользователей × 20 запросов в месяц & 200\,000 запросов\\
+      2 инстанса × 12 чтений в час × 24 ч × 30 дней & 17\,280 чтений\\
+      Хранение одного секрета & \$0{,}40\\
+      Вызовы в модели с кэшем & \(\approx\)\,\$0{,}09\\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  \medskip
+  Без кэша: около \$1{,}40 при одном чтении секрета на запрос.
+  \par\bigskip\slidelink{decision}{К выводу}
+\end{frame}
+
+\end{document}
