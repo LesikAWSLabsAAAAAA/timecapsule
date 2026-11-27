@@ -1,6 +1,7 @@
 <?php
-// Database connection. The connection settings (DB_HOST, DB_PORT, DB_NAME, DB_USER,
-// DB_PASSWORD) come from .env or the environment.
+// Database connection. Host, port, database and user come from the environment;
+// the password comes from Secrets Manager (DB_SECRET_ARN) or, for local
+// development only, from DB_PASSWORD.
 
 function db(): PDO
 {
@@ -14,7 +15,7 @@ function db(): PDO
             config('DB_NAME', 'timecapsule')
         );
 
-        $pdo = new PDO($dsn, config('DB_USER', 'timecapsule'), config('DB_PASSWORD', 'secret'), [
+        $pdo = new PDO($dsn, config('DB_USER', 'timecapsule'), db_password(), [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,        // SQL errors throw exceptions
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,   // rows as ['column' => value]
             PDO::ATTR_TIMEOUT => 5,                             // fail fast if the DB is down
@@ -35,20 +36,32 @@ function db_query(string $sql, array $params = []): PDOStatement
     return $statement;
 }
 
+// True when the exception came from the Secrets Manager credential lookup,
+// not from PostgreSQL itself.
+function db_error_is_secret(Throwable $e): bool
+{
+    $message = $e->getMessage();
+    return str_contains($message, 'Secrets Manager') || str_contains($message, 'database secret');
+}
+
 // Turn common database errors into a short hint for the person running the app.
 // Returns null for any other error.
 function db_problem_hint(Throwable $e): ?string
 {
+    if (db_error_is_secret($e)) {
+        return 'Cannot load database credentials from Secrets Manager. Check DB_SECRET_ARN and the timecapsule-dev-app-secretsmanager policy.';
+    }
+
+    $message = $e->getMessage();
     if (!$e instanceof PDOException) {
         return null;
     }
 
-    $message = $e->getMessage();
     if (str_contains($message, 'SQLSTATE[42P01]')) {       // undefined table
         return 'The database has no tables yet. Run: php bin/init-db.php';
     }
     if (str_contains($message, 'SQLSTATE[08')) {           // connection errors (08xxx)
-        return 'Cannot connect to the database. Check DB_HOST, DB_PORT, DB_NAME, DB_USER and DB_PASSWORD.';
+        return 'Cannot connect to the database. Check DB_HOST, DB_PORT, DB_NAME, DB_USER and the database password (DB_SECRET_ARN or DB_PASSWORD).';
     }
     return null;
 }

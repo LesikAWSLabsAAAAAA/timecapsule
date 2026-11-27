@@ -4,4 +4,13 @@
 !/storage/uploads/.gitkeep
 /storage/sessions/*
 !/storage/sessions/.gitkeep
+/storage/cache/*
+!/storage/cache/.gitkeep
 /storage/*.log
+
+# OpenTofu state, variables and provider caches are local secrets.
+/docs/**/terraform.tfstate
+/docs/**/terraform.tfstate.*
+/docs/**/*.tfvars
+/docs/**/*.auto.tfvars
+/docs/**/.terraform/
