@@ -155,16 +155,22 @@ resource "aws_launch_template" "app" {
   tag_specifications {
     resource_type = "instance"
     tags = {
-      Name = "timecapsule-dev-individual-app"
-      Lab  = "individual"
+      Name        = "timecapsule-dev-individual-app"
+      Project     = "timecapsule"
+      Environment = "dev"
+      Lab         = "individual"
+      Owner       = "lesik"
     }
   }
 
   tag_specifications {
     resource_type = "volume"
     tags = {
-      Name = "timecapsule-dev-individual-app"
-      Lab  = "individual"
+      Name        = "timecapsule-dev-individual-app"
+      Project     = "timecapsule"
+      Environment = "dev"
+      Lab         = "individual"
+      Owner       = "lesik"
     }
   }
 }
@@ -214,6 +220,24 @@ resource "aws_autoscaling_group" "app" {
   tag {
     key                 = "Lab"
     value               = "individual"
+    propagate_at_launch = true
+  }
+
+  tag {
+    key                 = "Project"
+    value               = "timecapsule"
+    propagate_at_launch = true
+  }
+
+  tag {
+    key                 = "Environment"
+    value               = "dev"
+    propagate_at_launch = true
+  }
+
+  tag {
+    key                 = "Owner"
+    value               = "lesik"
     propagate_at_launch = true
   }
 

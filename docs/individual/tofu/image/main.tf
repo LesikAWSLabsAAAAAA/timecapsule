@@ -39,7 +39,11 @@ resource "aws_ami_from_instance" "app" {
   snapshot_without_reboot = false
 
   tags = {
-    Name = var.ami_name
+    Name        = var.ami_name
+    Project     = "timecapsule"
+    Environment = "dev"
+    Lab         = "individual"
+    Owner       = "lesik"
   }
 }
 

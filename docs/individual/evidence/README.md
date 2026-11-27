@@ -17,6 +17,10 @@
 | `07-opener-b4.json` | Lambda opener открыл капсулу во время сбоя веб-приложения |
 | `08-b4-background-job.txt` | Капсула №11 и уведомление, созданные opener во время B4 |
 | `09-b4-target-health.txt` | HTTP 500, `unhealthy` targets и независимая работа статики/Lambda |
+| `10-baseline-inventory.txt` | Инвентаризация 6 исторических мест и 5 действующих копий до ротации |
+| `11-secret-measurements.txt` | 3 → 43 символа, 138–346 мс холодного чтения, 0–1 мс из кэша, `/health` |
+| `12-b4-access-denied.txt` | `AccessDeniedException`, HTTP 500 и `unhealthy` targets |
+| `13-old-password-rejected.txt` | Старый пароль отвергается PostgreSQL |
 
 ## Как повторяли B4
 

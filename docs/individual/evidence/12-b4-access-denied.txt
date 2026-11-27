@@ -1,0 +1,23 @@
+B4: explicit Deny in timecapsule-dev-app-secretsmanager
+
+Application log on an ASG instance (php-fpm error log):
+[27-Nov-2026 00:45:35 UTC] Secrets Manager GetSecretValue failed: AccessDeniedException
+[27-Nov-2026 00:45:35 UTC] Health check failed: Cannot load database credentials from Secrets Manager.
+
+Direct request on the instance:
+$ curl -sS -o /tmp/h.out -w '%{http_code}\n' http://127.0.0.1/health
+500
+{"status":"error","db":"error","credentials":"error",
+ "hint":"Cannot load database credentials from Secrets Manager. Check DB_SECRET_ARN and the timecapsule-dev-app-secretsmanager policy."}
+
+Through the ALB, while the target was still considered routable:
+HTTP 500 with the same JSON. After the health check marked both targets:
+TargetGroup timecapsule-dev-individual-tg:
+i-0a4913aa356942872  unhealthy  Target.ResponseCodeMismatch
+i-0ebd38b48c713c796  unhealthy  Target.ResponseCodeMismatch
+
+Static asset:
+$ curl -sS -o /tmp/app.css -w '%{http_code} %{size_download}\n' http://<alb>/css/app.css
+200 14507
+
+The error page rendered without a database connection.

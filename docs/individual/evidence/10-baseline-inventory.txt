@@ -1,0 +1,22 @@
+Baseline before the change (2026-11-27, eu-central-1)
+
+- timecapsule-dev-app: /var/www/timecapsule/.env contains DB_PASSWORD
+  (3 characters); DB_SECRET_ARN is absent.
+- Self-owned AMIs: 2.
+  - timecapsule-dev-app-lab6, created 2026-11-26 20:53 from the current
+    timecapsule-dev-app; therefore contains the same .env with the active
+    DB password.
+  - timecapsule-dev-app-lab2, created 2026-11-05, older than the RDS
+    migration; it is a historical copy, but the active password in it was
+    not independently confirmed.
+- Lambda timecapsule-dev-mailer and timecapsule-dev-opener: DB_PASSWORD
+  present in the function environment.
+- docs/lab7/tofu/app/terraform.tfstate: contains the application DB password
+  (local state, excluded from Git).
+- Secrets Manager: no timecapsule-dev-db secret.
+- IAM policy timecapsule-dev-app-secretsmanager: absent.
+- GET /health on the source instance: HTTP 200 with env credentials.
+
+Summary: 6 historical places where the password appeared; 5 places with the
+active password before rotation (server, lab6 AMI, two Lambda envs, lab7
+state). 1 of 2 AMIs had a confirmed working password.
